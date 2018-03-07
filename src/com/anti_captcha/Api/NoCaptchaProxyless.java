@@ -11,20 +11,20 @@ import org.json.JSONObject;
 import java.net.URL;
 
 public class NoCaptchaProxyless extends AnticaptchaBase implements IAnticaptchaTaskProtocol {
-    private URL WebsiteUrl;
-    private String WebsiteKey;
-    private String WebsiteSToken;
+    private URL websiteUrl;
+    private String websiteKey;
+    private String websiteSToken;
 
     public void setWebsiteUrl(URL websiteUrl) {
-        WebsiteUrl = websiteUrl;
+        this.websiteUrl = websiteUrl;
     }
 
     public void setWebsiteKey(String websiteKey) {
-        WebsiteKey = websiteKey;
+        this.websiteKey = websiteKey;
     }
 
     public void setWebsiteSToken(String websiteSToken) {
-        WebsiteSToken = websiteSToken;
+        this.websiteSToken = websiteSToken;
     }
 
     @Override
@@ -33,9 +33,9 @@ public class NoCaptchaProxyless extends AnticaptchaBase implements IAnticaptchaT
 
         try {
             postData.put("type", "NoCaptchaTaskProxyless");
-            postData.put("websiteURL", WebsiteUrl.toString());
-            postData.put("websiteKey", WebsiteKey);
-            postData.put("websiteSToken", WebsiteSToken);
+            postData.put("websiteURL", websiteUrl.toString());
+            postData.put("websiteKey", websiteKey);
+            postData.put("websiteSToken", websiteSToken);
         } catch (JSONException e) {
             DebugHelper.out("JSON compilation error: " + e.getMessage(), DebugHelper.Type.ERROR);
 

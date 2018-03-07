@@ -22,6 +22,12 @@ public abstract class AnticaptchaBase {
     private Integer taskId;
     private String clientKey;
 
+    public enum ProxyTypeOption {
+        HTTP,
+        SOCKS4,
+        SOCKS5
+    }
+
     private JSONObject jsonPostRequest(ApiMethod methodName, JSONObject jsonPostData) {
 
         String url = scheme + "://" + host + "/" + StringHelper.toCamelCase(methodName.toString());
