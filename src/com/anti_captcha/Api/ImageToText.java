@@ -1,6 +1,7 @@
 package com.anti_captcha.Api;
 
 import com.anti_captcha.AnticaptchaBase;
+import com.anti_captcha.ApiResponse.TaskResultResponse;
 import com.anti_captcha.Helper.DebugHelper;
 import com.anti_captcha.Helper.StringHelper;
 import com.anti_captcha.IAnticaptchaTaskProtocol;
@@ -88,8 +89,8 @@ public class ImageToText extends AnticaptchaBase implements IAnticaptchaTaskProt
     }
 
     @Override
-    public String getTaskSolution() {
-        return taskInfo.getSolution().getText();
+    public TaskResultResponse.SolutionData getTaskSolution() {
+        return taskInfo.getSolution();
     }
 
     public void setBodyBase64(String bodyBase64) {

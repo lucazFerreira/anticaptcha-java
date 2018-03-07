@@ -1,20 +1,28 @@
 package com.anti_captcha;
 
+import com.anti_captcha.Api.CustomCaptcha;
 import com.anti_captcha.Api.ImageToText;
 import com.anti_captcha.Api.NoCaptcha;
 import com.anti_captcha.Api.NoCaptchaProxyless;
 import com.anti_captcha.Helper.DebugHelper;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Iterator;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
 
-    public static void main(String[] args) throws InterruptedException, MalformedURLException {
+    public static void main(String[] args) throws InterruptedException, MalformedURLException, JSONException {
         exampleGetBalance();
         exampleImageToText();
         exampleNoCaptchaProxyless();
         exampleNoCaptcha();
+        exampleCustomCaptcha();
     }
 
     private static void exampleImageToText() throws InterruptedException {
@@ -32,7 +40,7 @@ public class Main {
         } else if (!api.waitForResult()) {
             DebugHelper.out("Could not solve the captcha.", DebugHelper.Type.ERROR);
         } else {
-            DebugHelper.out("Result: " + api.getTaskSolution(), DebugHelper.Type.SUCCESS);
+            DebugHelper.out("Result: " + api.getTaskSolution().getText(), DebugHelper.Type.SUCCESS);
         }
     }
 
@@ -52,7 +60,7 @@ public class Main {
         } else if (!api.waitForResult()) {
             DebugHelper.out("Could not solve the captcha.", DebugHelper.Type.ERROR);
         } else {
-            DebugHelper.out("Result: " + api.getTaskSolution(), DebugHelper.Type.SUCCESS);
+            DebugHelper.out("Result: " + api.getTaskSolution().getGRecaptchaResponse(), DebugHelper.Type.SUCCESS);
         }
     }
 
@@ -81,12 +89,11 @@ public class Main {
         } else if (!api.waitForResult()) {
             DebugHelper.out("Could not solve the captcha.", DebugHelper.Type.ERROR);
         } else {
-            DebugHelper.out("Result: " + api.getTaskSolution(), DebugHelper.Type.SUCCESS);
+            DebugHelper.out("Result: " + api.getTaskSolution().getGRecaptchaResponse(), DebugHelper.Type.SUCCESS);
         }
     }
 
-    private static void exampleGetBalance()
-    {
+    private static void exampleGetBalance() {
         DebugHelper.setVerboseMode(true);
 
         ImageToText api = new ImageToText();
@@ -94,13 +101,93 @@ public class Main {
 
         Double balance = api.getBalance();
 
-        if (balance == null)
-        {
+        if (balance == null) {
             DebugHelper.out("GetBalance() failed. " + api.getErrorMessage(), DebugHelper.Type.ERROR);
-        }
-        else
-        {
+        } else {
             DebugHelper.out("Balance: " + balance, DebugHelper.Type.SUCCESS);
+        }
+    }
+
+    private static void exampleCustomCaptcha() throws JSONException, InterruptedException {
+        DebugHelper.setVerboseMode(true);
+        int randInt = ThreadLocalRandom.current().nextInt(0, 10000);
+
+        JSONArray forms = new JSONArray();
+
+        forms.put(0, new JSONObject());
+        forms.getJSONObject(0).put("label", "number");
+        forms.getJSONObject(0).put("labelHint", false);
+        forms.getJSONObject(0).put("contentType", false);
+        forms.getJSONObject(0).put("name", "license_plate");
+        forms.getJSONObject(0).put("inputType", "text");
+        forms.getJSONObject(0).put("inputOptions", new JSONObject());
+        forms.getJSONObject(0).getJSONObject("inputOptions").put("width", "100");
+        forms.getJSONObject(0).getJSONObject("inputOptions").put(
+                "placeHolder",
+                "Enter letters and numbers without spaces"
+        );
+
+        forms.put(1, new JSONObject());
+        forms.getJSONObject(1).put("label", "Car color");
+        forms.getJSONObject(1).put("labelHint", "Select the car color");
+        forms.getJSONObject(1).put("contentType", false);
+        forms.getJSONObject(1).put("name", "color");
+        forms.getJSONObject(1).put("inputType", "select");
+        forms.getJSONObject(1).put("inputOptions", new JSONArray());
+        forms.getJSONObject(1).getJSONArray("inputOptions").put(0, new JSONObject());
+        forms.getJSONObject(1).getJSONArray("inputOptions").getJSONObject(0).put(
+                "value",
+                "white"
+        );
+        forms.getJSONObject(1).getJSONArray("inputOptions").getJSONObject(0).put(
+                "caption",
+                "White color"
+        );
+        forms.getJSONObject(1).getJSONArray("inputOptions").put(1, new JSONObject());
+        forms.getJSONObject(1).getJSONArray("inputOptions").getJSONObject(1).put(
+                "value",
+                "black"
+        );
+        forms.getJSONObject(1).getJSONArray("inputOptions").getJSONObject(1).put(
+                "caption",
+                "Black color"
+        );
+        forms.getJSONObject(1).getJSONArray("inputOptions").put(2, new JSONObject());
+        forms.getJSONObject(1).getJSONArray("inputOptions").getJSONObject(2).put(
+                "value",
+                "gray"
+        );
+        forms.getJSONObject(1).getJSONArray("inputOptions").getJSONObject(2).put(
+                "caption",
+                "Gray color"
+        );
+
+        CustomCaptcha api = new CustomCaptcha();
+        api.setClientKey("1234567890123456789012");
+        api.setImageUrl("https://files.anti-captcha.com/26/41f/c23/7c50ff19.jpg?random=" + randInt);
+        api.setAssignment("Enter the licence plate number");
+        api.setForms(forms);
+
+        if (!api.createTask()) {
+            DebugHelper.out(
+                    "API v2 send failed. " + api.getErrorMessage(),
+                    DebugHelper.Type.ERROR
+            );
+        } else if (!api.waitForResult()) {
+            DebugHelper.out("Could not solve the captcha.", DebugHelper.Type.ERROR);
+        } else {
+            JSONObject answers = api.getTaskSolution().getAnswers();
+            Iterator<?> keys = answers.keys();
+
+            while (keys.hasNext()) {
+                String question = (String) keys.next();
+                String answer = answers.getString(question);
+
+                DebugHelper.out(
+                        "The answer for the question '" + question + "' : " + answer,
+                        DebugHelper.Type.SUCCESS
+                );
+            }
         }
     }
 }

@@ -68,8 +68,6 @@ public class NoCaptcha extends NoCaptchaProxyless {
             return null;
         }
 
-
-
         return postData;
     }
 

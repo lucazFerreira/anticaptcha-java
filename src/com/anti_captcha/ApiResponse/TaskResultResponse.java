@@ -3,6 +3,7 @@ package com.anti_captcha.ApiResponse;
 import com.anti_captcha.Helper.DebugHelper;
 import com.anti_captcha.Helper.JsonHelper;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.time.ZoneId;
@@ -37,8 +38,8 @@ public class TaskResultResponse {
 
                 if (status.equals(StatusType.READY)) {
                     cost = JsonHelper.extractDouble(json, "cost");
-                    ip = JsonHelper.extractStr(json, "ip");
-                    solveCount = JsonHelper.extractInt(json, "solveCount");
+                    ip = JsonHelper.extractStr(json, "ip", true);
+                    solveCount = JsonHelper.extractInt(json, "solveCount", true);
                     createTime = unixTimeStampToDateTime(JsonHelper.extractDouble(json, "createTime"));
                     endTime = unixTimeStampToDateTime(JsonHelper.extractDouble(json, "endTime"));
 
@@ -48,8 +49,13 @@ public class TaskResultResponse {
                     solution.text = JsonHelper.extractStr(json, "solution", "text", true);
                     solution.url = JsonHelper.extractStr(json, "solution", "url", true);
 
-                    if (solution.gRecaptchaResponse == null && solution.text == null)
-                    {
+                    try {
+                        solution.answers = json.getJSONObject("solution").getJSONObject("answers");
+                    } catch (JSONException e) {
+                        solution.answers = null;
+                    }
+
+                    if (solution.gRecaptchaResponse == null && solution.text == null && solution.answers == null) {
                         DebugHelper.out("Got no 'solution' field from API", DebugHelper.Type.ERROR);
                     }
                 }
@@ -132,6 +138,7 @@ public class TaskResultResponse {
     }
 
     public class SolutionData {
+        private JSONObject answers; // Will be available for CustomCaptchaTasks only!
         private String gRecaptchaResponse; // Will be available for Recaptcha tasks only!
         private String gRecaptchaResponseMd5; // for Recaptcha with isExtended=true property
         private String text; // Will be available for ImageToText tasks only!
@@ -151,6 +158,10 @@ public class TaskResultResponse {
 
         public String getGRecaptchaResponse() {
             return gRecaptchaResponse;
+        }
+
+        public JSONObject getAnswers() {
+            return answers;
         }
     }
 }

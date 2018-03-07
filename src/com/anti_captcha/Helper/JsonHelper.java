@@ -47,13 +47,19 @@ public class JsonHelper {
     }
 
     public static Integer extractInt(JSONObject json, String fieldName) {
+        return extractInt(json, fieldName, false);
+    }
+
+    public static Integer extractInt(JSONObject json, String fieldName, boolean silent) {
         try {
             return json.getInt(fieldName);
         } catch (JSONException e1) {
-            String str = extractStr(json, fieldName);
+            String str = extractStr(json, fieldName, silent);
 
             if (str == null) {
-                DebugHelper.jsonFieldParseError(fieldName, json);
+                if (!silent) {
+                    DebugHelper.jsonFieldParseError(fieldName, json);
+                }
 
                 return null;
             }

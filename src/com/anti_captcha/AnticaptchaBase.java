@@ -54,6 +54,7 @@ public abstract class AnticaptchaBase {
 
     public abstract JSONObject getPostData();
 
+    @SuppressWarnings("WeakerAccess")
     public Boolean createTask() {
         JSONObject taskJson = getPostData();
 
@@ -110,6 +111,7 @@ public abstract class AnticaptchaBase {
         return true;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public Double getBalance() {
         JSONObject jsonPostData = new JSONObject();
 
@@ -147,6 +149,7 @@ public abstract class AnticaptchaBase {
         return balanceResponse.getBalance();
     }
 
+    @SuppressWarnings("WeakerAccess")
     public Boolean waitForResult(Integer maxSeconds, Integer currentSecond) throws InterruptedException {
         if (currentSecond >= maxSeconds) {
             DebugHelper.out("Time's out.", DebugHelper.Type.ERROR);
@@ -204,7 +207,7 @@ public abstract class AnticaptchaBase {
 
             return waitForResult(maxSeconds, currentSecond + 1);
         } else if (status != null && status.equals(TaskResultResponse.StatusType.READY)) {
-            if (solution.getGRecaptchaResponse() == null && solution.getText() == null) {
+            if (solution.getGRecaptchaResponse() == null && solution.getText() == null && solution.getAnswers() == null) {
                 DebugHelper.out("Got no 'solution' field from API", DebugHelper.Type.ERROR);
 
                 return false;
@@ -221,6 +224,7 @@ public abstract class AnticaptchaBase {
         return false;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public Boolean waitForResult() throws InterruptedException {
         return waitForResult(120, 0);
     }
@@ -229,10 +233,12 @@ public abstract class AnticaptchaBase {
         return waitForResult(maxSeconds, 0);
     }
 
+    @SuppressWarnings("WeakerAccess")
     public void setClientKey(String clientKey_) {
         clientKey = clientKey_;
     }
 
+    @SuppressWarnings("WeakerAccess")
     public String getErrorMessage() {
         return errorMessage == null ? "no error message" : errorMessage;
     }

@@ -5,26 +5,25 @@ import com.anti_captcha.ApiResponse.TaskResultResponse;
 import com.anti_captcha.Helper.DebugHelper;
 import com.anti_captcha.IAnticaptchaTaskProtocol;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.URL;
+public class CustomCaptcha extends AnticaptchaBase implements IAnticaptchaTaskProtocol {
+    private String imageUrl;
+    private String assignment;
+    private JSONArray forms;
 
-public class NoCaptchaProxyless extends AnticaptchaBase implements IAnticaptchaTaskProtocol {
-    private URL WebsiteUrl;
-    private String WebsiteKey;
-    private String WebsiteSToken;
-
-    public void setWebsiteUrl(URL websiteUrl) {
-        WebsiteUrl = websiteUrl;
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
-    public void setWebsiteKey(String websiteKey) {
-        WebsiteKey = websiteKey;
+    public void setAssignment(String assignment) {
+        this.assignment = assignment;
     }
 
-    public void setWebsiteSToken(String websiteSToken) {
-        WebsiteSToken = websiteSToken;
+    public void setForms(JSONArray forms) {
+        this.forms = forms;
     }
 
     @Override
@@ -32,10 +31,10 @@ public class NoCaptchaProxyless extends AnticaptchaBase implements IAnticaptchaT
         JSONObject postData = new JSONObject();
 
         try {
-            postData.put("type", "NoCaptchaTaskProxyless");
-            postData.put("websiteURL", WebsiteUrl.toString());
-            postData.put("websiteKey", WebsiteKey);
-            postData.put("websiteSToken", WebsiteSToken);
+            postData.put("type", "CustomCaptchaTask");
+            postData.put("imageUrl", imageUrl);
+            postData.put("assignment", assignment);
+            postData.put("forms", forms);
         } catch (JSONException e) {
             DebugHelper.out("JSON compilation error: " + e.getMessage(), DebugHelper.Type.ERROR);
 
