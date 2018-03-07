@@ -200,8 +200,7 @@ public class Main {
         api.setClientKey("1234567890123456789012");
         api.setWebsiteUrl(new URL("http://http.myjino.ru/funcaptcha_test/"));
         api.setWebsitePublicKey("DE0B0BB7-1EE4-4D70-1853-31B835D4506B");
-        api.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 \" +\n" +
-                "(KHTML, like Gecko) Chrome/52.0.2743.116");
+        api.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116");
 
         // proxy access parameters
         api.setProxyType(NoCaptcha.ProxyTypeOption.HTTP);
