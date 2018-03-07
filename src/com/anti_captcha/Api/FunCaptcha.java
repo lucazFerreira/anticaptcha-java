@@ -56,7 +56,7 @@ public class FunCaptcha extends AnticaptchaBase implements IAnticaptchaTaskProto
         }
 
         try {
-            postData.put("type", "NoCaptchaTask");
+            postData.put("type", "FunCaptchaTask");
             postData.put("websiteURL", websiteUrl);
             postData.put("websitePublicKey", websitePublicKey);
             postData.put("proxyType", proxyType.toString().toLowerCase());
@@ -77,5 +77,13 @@ public class FunCaptcha extends AnticaptchaBase implements IAnticaptchaTaskProto
     @Override
     public TaskResultResponse.SolutionData getTaskSolution() {
         return taskInfo.getSolution();
+    }
+
+    public void setWebsiteUrl(URL websiteUrl) {
+        this.websiteUrl = websiteUrl;
+    }
+
+    public void setWebsitePublicKey(String websitePublicKey) {
+        this.websitePublicKey = websitePublicKey;
     }
 }

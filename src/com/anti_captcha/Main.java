@@ -1,6 +1,7 @@
 package com.anti_captcha;
 
 import com.anti_captcha.Api.CustomCaptcha;
+import com.anti_captcha.Api.FunCaptcha;
 import com.anti_captcha.Api.ImageToText;
 import com.anti_captcha.Api.NoCaptcha;
 import com.anti_captcha.Api.NoCaptchaProxyless;
@@ -23,6 +24,7 @@ public class Main {
         exampleNoCaptchaProxyless();
         exampleNoCaptcha();
         exampleCustomCaptcha();
+        exampleFuncaptcha();
     }
 
     private static void exampleImageToText() throws InterruptedException {
@@ -188,6 +190,35 @@ public class Main {
                         DebugHelper.Type.SUCCESS
                 );
             }
+        }
+    }
+
+    private static void exampleFuncaptcha() throws MalformedURLException, InterruptedException {
+        DebugHelper.setVerboseMode(true);
+
+        FunCaptcha api = new FunCaptcha();
+        api.setClientKey("1234567890123456789012");
+        api.setWebsiteUrl(new URL("http://http.myjino.ru/funcaptcha_test/"));
+        api.setWebsitePublicKey("DE0B0BB7-1EE4-4D70-1853-31B835D4506B");
+        api.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 \" +\n" +
+                "(KHTML, like Gecko) Chrome/52.0.2743.116");
+
+        // proxy access parameters
+        api.setProxyType(NoCaptcha.ProxyTypeOption.HTTP);
+        api.setProxyAddress("xx.xxx.xx.xx");
+        api.setProxyPort(8282);
+        api.setProxyLogin("login");
+        api.setProxyPassword("password");
+
+        if (!api.createTask()) {
+            DebugHelper.out(
+                    "API v2 send failed. " + api.getErrorMessage(),
+                    DebugHelper.Type.ERROR
+            );
+        } else if (!api.waitForResult()) {
+            DebugHelper.out("Could not solve the captcha.", DebugHelper.Type.ERROR);
+        } else {
+            DebugHelper.out("Result: " + api.getTaskSolution().getToken(), DebugHelper.Type.SUCCESS);
         }
     }
 }

@@ -48,6 +48,7 @@ public class TaskResultResponse {
                     solution.gRecaptchaResponseMd5 = JsonHelper.extractStr(json, "solution", "gRecaptchaResponseMd5", true);
                     solution.text = JsonHelper.extractStr(json, "solution", "text", true);
                     solution.url = JsonHelper.extractStr(json, "solution", "url", true);
+                    solution.token = JsonHelper.extractStr(json, "solution", "token", true);
 
                     try {
                         solution.answers = json.getJSONObject("solution").getJSONObject("answers");
@@ -55,7 +56,7 @@ public class TaskResultResponse {
                         solution.answers = null;
                     }
 
-                    if (solution.gRecaptchaResponse == null && solution.text == null && solution.answers == null) {
+                    if (solution.gRecaptchaResponse == null && solution.text == null && solution.answers == null && solution.token == null) {
                         DebugHelper.out("Got no 'solution' field from API", DebugHelper.Type.ERROR);
                     }
                 }
@@ -138,11 +139,12 @@ public class TaskResultResponse {
     }
 
     public class SolutionData {
-        private JSONObject answers; // Will be available for CustomCaptchaTasks only!
+        private JSONObject answers; // Will be available for CustomCaptcha tasks only!
         private String gRecaptchaResponse; // Will be available for Recaptcha tasks only!
         private String gRecaptchaResponseMd5; // for Recaptcha with isExtended=true property
         private String text; // Will be available for ImageToText tasks only!
         private String url; // Will be available for ImageToText tasks only!
+        private String token; // Will be available for FunCaptcha tasks only
 
         public String getGRecaptchaResponseMd5() {
             return gRecaptchaResponseMd5;
@@ -162,6 +164,10 @@ public class TaskResultResponse {
 
         public JSONObject getAnswers() {
             return answers;
+        }
+
+        public String getToken() {
+            return token;
         }
     }
 }
