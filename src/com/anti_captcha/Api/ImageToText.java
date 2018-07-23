@@ -14,11 +14,41 @@ import java.io.File;
 public class ImageToText extends AnticaptchaBase implements IAnticaptchaTaskProtocol {
     private Boolean phrase;
     private Boolean case_;
-    private Boolean numeric;
+    private NumericOption numeric = NumericOption.NO_REQUIREMENTS;
     private Integer math;
-    private Integer minLenght;
+    private Integer minLength;
     private Integer maxLength;
     private String bodyBase64;
+
+    public void setPhrase(Boolean phrase) {
+        this.phrase = phrase;
+    }
+
+    public void setCase_(Boolean case_) {
+        this.case_ = case_;
+    }
+
+    public void setNumeric(NumericOption numeric) {
+        this.numeric = numeric;
+    }
+
+    public void setMath(Integer math) {
+        this.math = math;
+    }
+
+    public void setMinLength(Integer minLength) {
+        this.minLength = minLength;
+    }
+
+    public void setMaxLength(Integer maxLength) {
+        this.maxLength = maxLength;
+    }
+
+    public enum NumericOption {
+        NO_REQUIREMENTS,
+        NUMBERS_ONLY,
+        ANY_LETTERS_EXCEPT_NUMBERS
+    }
 
     public void setFilePath(String filePath) {
         File f = new File(filePath);
@@ -45,7 +75,7 @@ public class ImageToText extends AnticaptchaBase implements IAnticaptchaTaskProt
         return case_;
     }
 
-    public Boolean getNumeric() {
+    public NumericOption getNumeric() {
         return numeric;
     }
 
@@ -53,8 +83,8 @@ public class ImageToText extends AnticaptchaBase implements IAnticaptchaTaskProt
         return math;
     }
 
-    public Integer getMinLenght() {
-        return minLenght;
+    public Integer getMinLength() {
+        return minLength;
     }
 
     public Integer getMaxLength() {
@@ -75,9 +105,9 @@ public class ImageToText extends AnticaptchaBase implements IAnticaptchaTaskProt
             postData.put("body", bodyBase64.replace("\r", "").replace("\n", ""));
             postData.put("phrase", phrase);
             postData.put("case", case_);
-            postData.put("numeric", numeric);
+            postData.put("numeric", numeric.equals(NumericOption.NO_REQUIREMENTS) ? 0 : numeric.equals(NumericOption.NUMBERS_ONLY) ? 1 : 2);
             postData.put("math", math);
-            postData.put("minLength", minLenght);
+            postData.put("minLength", minLength);
             postData.put("maxLength", maxLength);
         } catch (JSONException e) {
             DebugHelper.out("JSON compilation error: " + e.getMessage(), DebugHelper.Type.ERROR);
