@@ -5,6 +5,7 @@ import com.anti_captcha.Api.FunCaptcha;
 import com.anti_captcha.Api.ImageToText;
 import com.anti_captcha.Api.NoCaptcha;
 import com.anti_captcha.Api.NoCaptchaProxyless;
+import com.anti_captcha.Api.RecaptchaV3Proxyless;
 import com.anti_captcha.Helper.DebugHelper;
 
 import org.json.JSONArray;
@@ -22,6 +23,7 @@ public class Main {
         exampleGetBalance();
         exampleImageToText();
         exampleNoCaptchaProxyless();
+        exampleRecaptchaV3Proxyless();
         exampleNoCaptcha();
         exampleCustomCaptcha();
         exampleFuncaptcha();
@@ -53,6 +55,27 @@ public class Main {
         api.setClientKey("1234567890123456789012");
         api.setWebsiteUrl(new URL("http://http.myjino.ru/recaptcha/test-get.php"));
         api.setWebsiteKey("6Lc_aCMTAAAAABx7u2W0WPXnVbI_v6ZdbM6rYf16");
+
+        if (!api.createTask()) {
+            DebugHelper.out(
+                    "API v2 send failed. " + api.getErrorMessage(),
+                    DebugHelper.Type.ERROR
+            );
+        } else if (!api.waitForResult()) {
+            DebugHelper.out("Could not solve the captcha.", DebugHelper.Type.ERROR);
+        } else {
+            DebugHelper.out("Result: " + api.getTaskSolution().getGRecaptchaResponse(), DebugHelper.Type.SUCCESS);
+        }
+    }
+
+    private static void exampleRecaptchaV3Proxyless() throws MalformedURLException, InterruptedException {
+        DebugHelper.setVerboseMode(true);
+
+        RecaptchaV3Proxyless api = new RecaptchaV3Proxyless();
+        api.setClientKey("1234567890123456789012");
+        api.setWebsiteUrl(new URL("http://www.supremenewyork.com"));
+        api.setWebsiteKey("6Leva6oUAAAAAMFYqdLAI8kJ5tw7BtkHYpK10RcD");
+        api.setPageAction("testPageAction");
 
         if (!api.createTask()) {
             DebugHelper.out(
