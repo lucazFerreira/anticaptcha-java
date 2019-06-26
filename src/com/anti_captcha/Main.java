@@ -2,6 +2,7 @@ package com.anti_captcha;
 
 import com.anti_captcha.Api.CustomCaptcha;
 import com.anti_captcha.Api.FunCaptcha;
+import com.anti_captcha.Api.GeeTestProxyless;
 import com.anti_captcha.Api.ImageToText;
 import com.anti_captcha.Api.NoCaptcha;
 import com.anti_captcha.Api.NoCaptchaProxyless;
@@ -27,6 +28,32 @@ public class Main {
         exampleNoCaptcha();
         exampleCustomCaptcha();
         exampleFuncaptcha();
+        exampleGeeTestProxyless();
+    }
+
+    private static void exampleGeeTestProxyless() throws MalformedURLException, InterruptedException {
+        DebugHelper.setVerboseMode(true);
+
+        GeeTestProxyless api = new GeeTestProxyless();
+        api.setClientKey("1234567890123456789012");
+        api.setWebsiteUrl(new URL("https://auth.geetest.com/"));
+        api.setWebsiteKey("b6e21f90a91a3c2d4a31fe84e10d0442");
+        // "challenge" for testing you can get here: https://www.binance.com/security/getGtCode.html?t=1561554068768
+        // you need to get a new "challenge" each time
+        api.setWebsiteChallenge("cd0b3b5c33fb951ab364d9e13ccd7bf8");
+
+        if (!api.createTask()) {
+            DebugHelper.out(
+                    "API v2 send failed. " + api.getErrorMessage(),
+                    DebugHelper.Type.ERROR
+            );
+        } else if (!api.waitForResult()) {
+            DebugHelper.out("Could not solve the captcha.", DebugHelper.Type.ERROR);
+        } else {
+            DebugHelper.out("Result CHALLENGE: " + api.getTaskSolution().getChallenge(), DebugHelper.Type.SUCCESS);
+            DebugHelper.out("Result SECCODE: " + api.getTaskSolution().getSeccode(), DebugHelper.Type.SUCCESS);
+            DebugHelper.out("Result VALIDATE: " + api.getTaskSolution().getValidate(), DebugHelper.Type.SUCCESS);
+        }
     }
 
     private static void exampleImageToText() throws InterruptedException {

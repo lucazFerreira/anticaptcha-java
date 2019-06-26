@@ -49,6 +49,9 @@ public class TaskResultResponse {
                     solution.text = JsonHelper.extractStr(json, "solution", "text", true);
                     solution.url = JsonHelper.extractStr(json, "solution", "url", true);
                     solution.token = JsonHelper.extractStr(json, "solution", "token", true);
+                    solution.challenge = JsonHelper.extractStr(json, "solution", "challenge", true);
+                    solution.seccode = JsonHelper.extractStr(json, "solution", "seccode", true);
+                    solution.validate = JsonHelper.extractStr(json, "solution", "validate", true);
 
                     try {
                         solution.answers = json.getJSONObject("solution").getJSONObject("answers");
@@ -56,7 +59,7 @@ public class TaskResultResponse {
                         solution.answers = null;
                     }
 
-                    if (solution.gRecaptchaResponse == null && solution.text == null && solution.answers == null && solution.token == null) {
+                    if (solution.gRecaptchaResponse == null && solution.text == null && solution.answers == null && solution.token == null && solution.challenge == null && solution.seccode == null && solution.validate == null) {
                         DebugHelper.out("Got no 'solution' field from API", DebugHelper.Type.ERROR);
                     }
                 }
@@ -145,9 +148,24 @@ public class TaskResultResponse {
         private String text; // Will be available for ImageToText tasks only!
         private String url; // Will be available for ImageToText tasks only!
         private String token; // Will be available for FunCaptcha tasks only
+        private String challenge; // Will be available for GeeTest tasks only
+        private String seccode; // Will be available for GeeTest tasks only
+        private String validate; // Will be available for GeeTest tasks only
 
         public String getGRecaptchaResponseMd5() {
             return gRecaptchaResponseMd5;
+        }
+
+        public String getChallenge() {
+            return challenge;
+        }
+
+        public String getSeccode() {
+            return seccode;
+        }
+
+        public String getValidate() {
+            return validate;
         }
 
         public String getText() {
