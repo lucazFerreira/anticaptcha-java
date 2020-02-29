@@ -37,8 +37,8 @@ public class RecaptchaV3Proxyless extends AnticaptchaBase implements IAnticaptch
     }
 
     public void setMinScore(Double minScore) {
-        if (!minScore.equals(0.3) && !minScore.equals(0.5) && !minScore.equals(0.7)) {
-            DebugHelper.out("minScore must be one of these: 0.3, 0.5, 0.7; you passed " + minScore + "; 0.3 will be set", DebugHelper.Type.ERROR);
+        if (!minScore.equals(0.3) && !minScore.equals(0.7) && !minScore.equals(0.9)) {
+            DebugHelper.out("minScore must be one of these: 0.3, 0.7, 0.9; you passed " + minScore + "; 0.3 will be set", DebugHelper.Type.ERROR);
         } else {
             this.minScore = minScore;
         }
