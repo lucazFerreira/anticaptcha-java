@@ -3,6 +3,7 @@ package com.anti_captcha;
 import com.anti_captcha.Api.CustomCaptcha;
 import com.anti_captcha.Api.FunCaptcha;
 import com.anti_captcha.Api.GeeTestProxyless;
+import com.anti_captcha.Api.HCaptchaProxyless;
 import com.anti_captcha.Api.ImageToText;
 import com.anti_captcha.Api.NoCaptcha;
 import com.anti_captcha.Api.NoCaptchaProxyless;
@@ -31,6 +32,7 @@ public class Main {
         exampleCustomCaptcha();
         exampleFuncaptcha();
         exampleGeeTestProxyless();
+        exampleHCaptchaProxyless();
     }
 
     private static void exampleGeeTestProxyless() throws MalformedURLException, InterruptedException {
@@ -106,6 +108,26 @@ public class Main {
         api.setClientKey("1234567890123456789012");
         api.setWebsiteUrl(new URL("http://http.myjino.ru/recaptcha/test-get.php"));
         api.setWebsiteKey("6Lc_aCMTAAAAABx7u2W0WPXnVbI_v6ZdbM6rYf16");
+
+        if (!api.createTask()) {
+            DebugHelper.out(
+                    "API v2 send failed. " + api.getErrorMessage(),
+                    DebugHelper.Type.ERROR
+            );
+        } else if (!api.waitForResult()) {
+            DebugHelper.out("Could not solve the captcha.", DebugHelper.Type.ERROR);
+        } else {
+            DebugHelper.out("Result: " + api.getTaskSolution().getGRecaptchaResponse(), DebugHelper.Type.SUCCESS);
+        }
+    }
+
+    private static void exampleHCaptchaProxyless() throws MalformedURLException, InterruptedException {
+        DebugHelper.setVerboseMode(true);
+
+        HCaptchaProxyless api = new HCaptchaProxyless();
+        api.setClientKey("1234567890123456789012");
+        api.setWebsiteUrl(new URL("http://democaptcha.com/"));
+        api.setWebsiteKey("51829642-2cda-4b09-896c-594f89d700cc");
 
         if (!api.createTask()) {
             DebugHelper.out(

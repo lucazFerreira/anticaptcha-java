@@ -22,7 +22,7 @@ public class HCaptcha extends HCaptchaProxyless implements IAnticaptchaTaskProto
         JSONObject postData = new JSONObject();
 
         try {
-            postData.put("type", "RecaptchaV3TaskProxyless");
+            postData.put("type", "HCaptchaTask");
             postData.put("websiteURL", websiteUrl.toString());
             postData.put("websiteKey", websiteKey);
             postData.put("proxyType", proxyType.toString().toLowerCase());

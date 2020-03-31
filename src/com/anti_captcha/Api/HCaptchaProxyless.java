@@ -18,7 +18,7 @@ public class HCaptchaProxyless extends AnticaptchaBase implements IAnticaptchaTa
         JSONObject postData = new JSONObject();
 
         try {
-            postData.put("type", "RecaptchaV3TaskProxyless");
+            postData.put("type", "HCaptchaTaskProxyless");
             postData.put("websiteURL", websiteUrl.toString());
             postData.put("websiteKey", websiteKey);
         } catch (JSONException e) {
