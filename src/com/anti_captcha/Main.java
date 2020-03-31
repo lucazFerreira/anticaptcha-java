@@ -7,6 +7,7 @@ import com.anti_captcha.Api.ImageToText;
 import com.anti_captcha.Api.NoCaptcha;
 import com.anti_captcha.Api.NoCaptchaProxyless;
 import com.anti_captcha.Api.RecaptchaV3Proxyless;
+import com.anti_captcha.Api.SquareCaptcha;
 import com.anti_captcha.Helper.DebugHelper;
 
 import org.json.JSONArray;
@@ -23,6 +24,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException, MalformedURLException, JSONException {
         exampleGetBalance();
         exampleImageToText();
+        exampleSquare();
         exampleNoCaptchaProxyless();
         exampleRecaptchaV3Proxyless();
         exampleNoCaptcha();
@@ -72,6 +74,28 @@ public class Main {
             DebugHelper.out("Could not solve the captcha.", DebugHelper.Type.ERROR);
         } else {
             DebugHelper.out("Result: " + api.getTaskSolution().getText(), DebugHelper.Type.SUCCESS);
+        }
+    }
+
+    private static void exampleSquare() throws InterruptedException {
+        DebugHelper.setVerboseMode(true);
+
+        SquareCaptcha api = new SquareCaptcha();
+        api.setClientKey("1234567890123456789012");
+        api.setFilePath("square.jpg");
+        api.setObjectName("FISH / РЫБА");
+        api.setColumnsCount(4);
+        api.setRowsCount(4);
+
+        if (!api.createTask()) {
+            DebugHelper.out(
+                    "API v2 send failed. " + api.getErrorMessage(),
+                    DebugHelper.Type.ERROR
+            );
+        } else if (!api.waitForResult()) {
+            DebugHelper.out("Could not solve the captcha.", DebugHelper.Type.ERROR);
+        } else {
+            DebugHelper.out("Result: " + api.getTaskSolution().getCellNumbers(), DebugHelper.Type.SUCCESS);
         }
     }
 

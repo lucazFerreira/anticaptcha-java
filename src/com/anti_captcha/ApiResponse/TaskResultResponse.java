@@ -3,11 +3,14 @@ package com.anti_captcha.ApiResponse;
 import com.anti_captcha.Helper.DebugHelper;
 import com.anti_captcha.Helper.JsonHelper;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TaskResultResponse {
     private Integer errorId;
@@ -54,13 +57,24 @@ public class TaskResultResponse {
                     solution.validate = JsonHelper.extractStr(json, "solution", "validate", true);
 
                     try {
+                        JSONArray jsonArr;
+                        jsonArr = json.getJSONObject("solution").getJSONArray("cellNumbers");
+
+                        int len = jsonArr.length();
+                        for (int i = 0; i < len; i++) {
+                            solution.cellNumbers.add((Integer) jsonArr.get(i));
+                        }
+                    } catch (JSONException ignored) {
+                    }
+
+                    try {
                         solution.answers = json.getJSONObject("solution").getJSONObject("answers");
                     } catch (JSONException e) {
                         solution.answers = null;
                     }
 
-                    if (solution.gRecaptchaResponse == null && solution.text == null && solution.answers == null && solution.token == null && solution.challenge == null && solution.seccode == null && solution.validate == null) {
-                        DebugHelper.out("Got no 'solution' field from API", DebugHelper.Type.ERROR);
+                    if (solution.gRecaptchaResponse == null && solution.text == null && solution.answers == null && solution.token == null && solution.challenge == null && solution.seccode == null && solution.validate == null && solution.cellNumbers.size() == 0) {
+                        DebugHelper.out("2 Got no 'solution' field from API", DebugHelper.Type.ERROR);
                     }
                 }
             } else {
@@ -151,6 +165,7 @@ public class TaskResultResponse {
         private String challenge; // Will be available for GeeTest tasks only
         private String seccode; // Will be available for GeeTest tasks only
         private String validate; // Will be available for GeeTest tasks only
+        private List<Integer> cellNumbers = new ArrayList<>(); // Will be available for Square tasks only
 
         public String getGRecaptchaResponseMd5() {
             return gRecaptchaResponseMd5;
@@ -186,6 +201,10 @@ public class TaskResultResponse {
 
         public String getToken() {
             return token;
+        }
+
+        public List<Integer> getCellNumbers() {
+            return cellNumbers;
         }
     }
 }

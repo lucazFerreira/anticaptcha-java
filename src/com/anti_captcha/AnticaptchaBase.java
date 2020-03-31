@@ -213,7 +213,7 @@ public abstract class AnticaptchaBase {
 
             return waitForResult(maxSeconds, currentSecond + 1);
         } else if (status != null && status.equals(TaskResultResponse.StatusType.READY)) {
-            if (solution.getGRecaptchaResponse() == null && solution.getText() == null && solution.getAnswers() == null && solution.getToken() == null && solution.getChallenge() == null && solution.getSeccode() == null && solution.getValidate() == null) {
+            if (solution.getGRecaptchaResponse() == null && solution.getText() == null && solution.getAnswers() == null && solution.getToken() == null && solution.getChallenge() == null && solution.getSeccode() == null && solution.getValidate() == null && solution.getCellNumbers().size() == 0) {
                 DebugHelper.out("Got no 'solution' field from API", DebugHelper.Type.ERROR);
 
                 return false;
