@@ -26,9 +26,9 @@ public class Main {
         exampleGetBalance();
         exampleImageToText();
         exampleSquare();
-        exampleNoCaptchaProxyless();
+        exampleRecaptchaV2Proxyless();
         exampleRecaptchaV3Proxyless();
-        exampleNoCaptcha();
+        exampleRecaptchaV2();
         exampleCustomCaptcha();
         exampleFuncaptcha();
         exampleGeeTestProxyless();
@@ -101,7 +101,7 @@ public class Main {
         }
     }
 
-    private static void exampleNoCaptchaProxyless() throws MalformedURLException, InterruptedException {
+    private static void exampleRecaptchaV2Proxyless() throws MalformedURLException, InterruptedException {
         DebugHelper.setVerboseMode(true);
 
         RecaptchaV2Proxyless api = new RecaptchaV2Proxyless();
@@ -162,7 +162,7 @@ public class Main {
         }
     }
 
-    private static void exampleNoCaptcha() throws MalformedURLException, InterruptedException {
+    private static void exampleRecaptchaV2() throws MalformedURLException, InterruptedException {
         DebugHelper.setVerboseMode(true);
 
         RecaptchaV2 api = new RecaptchaV2();
