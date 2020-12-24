@@ -26,9 +26,12 @@ public class Main {
         exampleGetBalance();
         exampleImageToText();
         exampleSquare();
+        exampleRecaptchaV2();
         exampleRecaptchaV2Proxyless();
         exampleRecaptchaV3Proxyless();
-        exampleRecaptchaV2();
+        exampleRecaptchaV2Enterprise();
+        exampleRecaptchaV2EnterpriseProxyless();
+        exampleRecaptchaV3EnterpriseProxyless();
         exampleCustomCaptcha();
         exampleFuncaptcha();
         exampleGeeTestProxyless();
@@ -178,6 +181,95 @@ public class Main {
         api.setProxyPort(8282);
         api.setProxyLogin("login");
         api.setProxyPassword("password");
+
+        if (!api.createTask()) {
+            DebugHelper.out(
+                    "API v2 send failed. " + api.getErrorMessage(),
+                    DebugHelper.Type.ERROR
+            );
+        } else if (!api.waitForResult()) {
+            DebugHelper.out("Could not solve the captcha.", DebugHelper.Type.ERROR);
+        } else {
+            DebugHelper.out("Result: " + api.getTaskSolution().getGRecaptchaResponse(), DebugHelper.Type.SUCCESS);
+        }
+    }
+
+
+    private static void exampleRecaptchaV2Enterprise() throws MalformedURLException, InterruptedException {
+        DebugHelper.setVerboseMode(true);
+
+        RecaptchaV2Enterprise api = new RecaptchaV2Enterprise();
+        api.setClientKey("1234567890123456789012");
+        api.setWebsiteUrl(new URL("http://http.myjino.ru/recaptcha/test-get.php"));
+        api.setWebsiteKey("6Lc_aCMTAAAAABx7u2W0WPXnVbI_v6ZdbM6rYf16");
+        api.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 " +
+                "(KHTML, like Gecko) Chrome/52.0.2743.116");
+
+        // proxy access parameters
+        api.setProxyType(RecaptchaV2.ProxyTypeOption.HTTP);
+        api.setProxyAddress("xx.xxx.xx.xx");
+        api.setProxyPort(8282);
+        api.setProxyLogin("login");
+        api.setProxyPassword("password");
+
+        JSONObject enterprisePayload = new JSONObject();
+        try {
+            enterprisePayload.put("s", "SOME_UNDOCUMENTED_TOKEN_VALUE");
+        } catch (Exception e) {
+            DebugHelper.out("JSON error: "+e.getMessage(), DebugHelper.Type.ERROR);
+            return;
+        }
+        api.setEnterprisePayload(enterprisePayload);
+
+        if (!api.createTask()) {
+            DebugHelper.out(
+                    "API v2 send failed. " + api.getErrorMessage(),
+                    DebugHelper.Type.ERROR
+            );
+        } else if (!api.waitForResult()) {
+            DebugHelper.out("Could not solve the captcha.", DebugHelper.Type.ERROR);
+        } else {
+            DebugHelper.out("Result: " + api.getTaskSolution().getGRecaptchaResponse(), DebugHelper.Type.SUCCESS);
+        }
+    }
+
+    private static void exampleRecaptchaV2EnterpriseProxyless() throws MalformedURLException, InterruptedException {
+        DebugHelper.setVerboseMode(true);
+
+        RecaptchaV2EnterpriseProxyless api = new RecaptchaV2EnterpriseProxyless();
+        api.setClientKey("1234567890123456789012");
+        api.setWebsiteUrl(new URL("http://http.myjino.ru/recaptcha/test-get.php"));
+        api.setWebsiteKey("6Lc_aCMTAAAAABx7u2W0WPXnVbI_v6ZdbM6rYf16");
+
+        JSONObject enterprisePayload = new JSONObject();
+        try {
+            enterprisePayload.put("s", "SOME_UNDOCUMENTED_TOKEN_VALUE");
+        } catch (Exception e) {
+            DebugHelper.out("JSON error: "+e.getMessage(), DebugHelper.Type.ERROR);
+            return;
+        }
+        api.setEnterprisePayload(enterprisePayload);
+
+        if (!api.createTask()) {
+            DebugHelper.out(
+                    "API v2 send failed. " + api.getErrorMessage(),
+                    DebugHelper.Type.ERROR
+            );
+        } else if (!api.waitForResult()) {
+            DebugHelper.out("Could not solve the captcha.", DebugHelper.Type.ERROR);
+        } else {
+            DebugHelper.out("Result: " + api.getTaskSolution().getGRecaptchaResponse(), DebugHelper.Type.SUCCESS);
+        }
+    }
+
+    private static void exampleRecaptchaV3EnterpriseProxyless() throws MalformedURLException, InterruptedException {
+        DebugHelper.setVerboseMode(true);
+
+        RecaptchaV3EnterpriseProxyless api = new RecaptchaV3EnterpriseProxyless();
+        api.setClientKey("1234567890123456789012");
+        api.setWebsiteUrl(new URL("http://www.supremenewyork.com"));
+        api.setWebsiteKey("6Leva6oUAAAAAMFYqdLAI8kJ5tw7BtkHYpK10RcD");
+        api.setPageAction("testPageAction");
 
         if (!api.createTask()) {
             DebugHelper.out(
