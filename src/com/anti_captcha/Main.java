@@ -5,8 +5,8 @@ import com.anti_captcha.Api.FunCaptcha;
 import com.anti_captcha.Api.GeeTestProxyless;
 import com.anti_captcha.Api.HCaptchaProxyless;
 import com.anti_captcha.Api.ImageToText;
-import com.anti_captcha.Api.NoCaptcha;
-import com.anti_captcha.Api.NoCaptchaProxyless;
+import com.anti_captcha.Api.RecaptchaV2;
+import com.anti_captcha.Api.RecaptchaV2Proxyless;
 import com.anti_captcha.Api.RecaptchaV3Proxyless;
 import com.anti_captcha.Api.SquareCaptcha;
 import com.anti_captcha.Helper.DebugHelper;
@@ -104,7 +104,7 @@ public class Main {
     private static void exampleNoCaptchaProxyless() throws MalformedURLException, InterruptedException {
         DebugHelper.setVerboseMode(true);
 
-        NoCaptchaProxyless api = new NoCaptchaProxyless();
+        RecaptchaV2Proxyless api = new RecaptchaV2Proxyless();
         api.setClientKey("1234567890123456789012");
         api.setWebsiteUrl(new URL("http://http.myjino.ru/recaptcha/test-get.php"));
         api.setWebsiteKey("6Lc_aCMTAAAAABx7u2W0WPXnVbI_v6ZdbM6rYf16");
@@ -165,7 +165,7 @@ public class Main {
     private static void exampleNoCaptcha() throws MalformedURLException, InterruptedException {
         DebugHelper.setVerboseMode(true);
 
-        NoCaptcha api = new NoCaptcha();
+        RecaptchaV2 api = new RecaptchaV2();
         api.setClientKey("1234567890123456789012");
         api.setWebsiteUrl(new URL("http://http.myjino.ru/recaptcha/test-get.php"));
         api.setWebsiteKey("6Lc_aCMTAAAAABx7u2W0WPXnVbI_v6ZdbM6rYf16");
@@ -173,7 +173,7 @@ public class Main {
                 "(KHTML, like Gecko) Chrome/52.0.2743.116");
 
         // proxy access parameters
-        api.setProxyType(NoCaptcha.ProxyTypeOption.HTTP);
+        api.setProxyType(RecaptchaV2.ProxyTypeOption.HTTP);
         api.setProxyAddress("xx.xxx.xx.xx");
         api.setProxyPort(8282);
         api.setProxyLogin("login");
@@ -299,7 +299,7 @@ public class Main {
         api.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116");
 
         // proxy access parameters
-        api.setProxyType(NoCaptcha.ProxyTypeOption.HTTP);
+        api.setProxyType(RecaptchaV2.ProxyTypeOption.HTTP);
         api.setProxyAddress("xx.xxx.xx.xx");
         api.setProxyPort(8282);
         api.setProxyLogin("login");
