@@ -8,6 +8,9 @@ import com.anti_captcha.Api.ImageToText;
 import com.anti_captcha.Api.RecaptchaV2;
 import com.anti_captcha.Api.RecaptchaV2Proxyless;
 import com.anti_captcha.Api.RecaptchaV3Proxyless;
+import com.anti_captcha.Api.RecaptchaV2Enterprise;
+import com.anti_captcha.Api.RecaptchaV2EnterpriseProxyless;
+import com.anti_captcha.Api.RecaptchaV3EnterpriseProxyless;
 import com.anti_captcha.Api.SquareCaptcha;
 import com.anti_captcha.Helper.DebugHelper;
 
