@@ -1,6 +1,6 @@
 package com.anti_captcha;
 
-import com.anti_captcha.Api.FunCaptcha;
+import com.anti_captcha.Api.GeeTest;
 import com.anti_captcha.Api.GeeTestProxyless;
 import com.anti_captcha.Api.HCaptchaProxyless;
 import com.anti_captcha.Api.ImageToText;
@@ -10,17 +10,16 @@ import com.anti_captcha.Api.RecaptchaV3Proxyless;
 import com.anti_captcha.Api.RecaptchaV2Enterprise;
 import com.anti_captcha.Api.RecaptchaV2EnterpriseProxyless;
 import com.anti_captcha.Api.RecaptchaV3EnterpriseProxyless;
+import com.anti_captcha.Api.FunCaptcha;
+import com.anti_captcha.Api.FunCaptchaProxyless;
 import com.anti_captcha.Api.SquareCaptcha;
 import com.anti_captcha.Helper.DebugHelper;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.Iterator;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Main {
 
