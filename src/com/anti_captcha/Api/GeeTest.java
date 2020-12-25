@@ -2,12 +2,12 @@ package com.anti_captcha.Api;
 
 import com.anti_captcha.ApiResponse.TaskResultResponse;
 import com.anti_captcha.Helper.DebugHelper;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class FunCaptcha extends FunCaptchaProxyless {
+public class GeeTest extends GeeTestProxyless {
+
     private String proxyLogin;
     private String proxyPassword;
     private Integer proxyPort;
@@ -51,13 +51,14 @@ public class FunCaptcha extends FunCaptchaProxyless {
         }
 
         try {
-            postData.put("type", "FunCaptchaTask");
+            postData.put("type", "GeeTestTask");
             postData.put("proxyType", proxyType.toString().toLowerCase());
             postData.put("proxyAddress", proxyAddress);
             postData.put("proxyPort", proxyPort);
             postData.put("proxyLogin", proxyLogin);
             postData.put("proxyPassword", proxyPassword);
             postData.put("userAgent", userAgent);
+
         } catch (JSONException e) {
             DebugHelper.out("JSON compilation error: " + e.getMessage(), DebugHelper.Type.ERROR);
 

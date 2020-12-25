@@ -15,6 +15,7 @@ public class GeeTestProxyless extends AnticaptchaBase implements IAnticaptchaTas
     private String websiteKey;
     private String websiteChallenge;
     private String geetestApiServerSubdomain;
+    private String geetestLib;
 
     public URL getWebsiteUrl() {
         return websiteUrl;
@@ -34,6 +35,10 @@ public class GeeTestProxyless extends AnticaptchaBase implements IAnticaptchaTas
 
     public void setGeetestApiServerSubdomain(String geetestApiServerSubdomain) {
         this.geetestApiServerSubdomain = geetestApiServerSubdomain;
+    }
+
+    public void setGeetestLib(String geetestLib) {
+        this.geetestLib = geetestLib;
     }
 
     public void setWebsiteUrl(URL websiteUrl) {
@@ -58,9 +63,13 @@ public class GeeTestProxyless extends AnticaptchaBase implements IAnticaptchaTas
             postData.put("gt", websiteKey);
             postData.put("challenge", websiteChallenge);
 
-            if (geetestApiServerSubdomain != null && geetestApiServerSubdomain.length() > 0) {
+            if (!geetestApiServerSubdomain.equals(null) && geetestApiServerSubdomain.length() > 0) {
                 postData.put("geetestApiServerSubdomain", geetestApiServerSubdomain);
             }
+            if (!geetestLib.equals(null)) {
+                postData.put("geetestGetLib", geetestLib);
+            }
+
         } catch (JSONException e) {
             DebugHelper.out("JSON compilation error: " + e.getMessage(), DebugHelper.Type.ERROR);
 
