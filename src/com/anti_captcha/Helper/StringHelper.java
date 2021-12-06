@@ -3,7 +3,7 @@ package com.anti_captcha.Helper;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import javax.xml.bind.DatatypeConverter;
+import org.apache.commons.codec.binary.Base64;
 
 public class StringHelper {
     public static String toCamelCase(String s) {
@@ -19,7 +19,7 @@ public class StringHelper {
 
     public static String imageFileToBase64String(String path) {
         try {
-            return DatatypeConverter.printBase64Binary(Files.readAllBytes(Paths.get(path)));
+            return new String(Base64.encodeBase64(Files.readAllBytes(Paths.get(path))));
         } catch (Exception e) {
             return null;
         }
