@@ -1,5 +1,6 @@
 package com.anti_captcha.Helper;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -96,6 +97,22 @@ public class JsonHelper {
 
                 return null;
             }
+        }
+    }
+
+    public static JSONArray extractJSONArray(JSONObject json, String firstLevel, String fieldName) {
+        try {
+            return json.getJSONObject(firstLevel).getJSONArray(fieldName);
+        } catch (JSONException e) {
+            return null;
+        }
+    }
+
+    public static JSONObject extractJSONObject(JSONObject json, String firstLevel, String fieldName) {
+        try {
+            return json.getJSONObject(firstLevel).getJSONObject(fieldName);
+        } catch (JSONException e) {
+            return null;
         }
     }
 }

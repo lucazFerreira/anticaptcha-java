@@ -55,10 +55,22 @@ public class TaskResultResponse {
                     solution.challenge = JsonHelper.extractStr(json, "solution", "challenge", true);
                     solution.seccode = JsonHelper.extractStr(json, "solution", "seccode", true);
                     solution.validate = JsonHelper.extractStr(json, "solution", "validate", true);
+                    solution.cookies = JsonHelper.extractJSONObject(json,"solution",  "cookies");
+                    solution.localStorage = JsonHelper.extractJSONObject(json, "solution", "localStorage");
+                    solution.fingerprint = JsonHelper.extractJSONObject(json,"solution",  "fingerprint");
+                    solution.domain = JsonHelper.extractStr(json,"solution",  "domain", true);
 
 
-                    if (solution.gRecaptchaResponse == null && solution.text == null && solution.token == null && solution.challenge == null && solution.seccode == null && solution.validate == null) {
+                    if (solution.gRecaptchaResponse == null &&
+                        solution.text == null &&
+                        solution.token == null &&
+                        solution.challenge == null &&
+                        solution.seccode == null &&
+                        solution.validate == null &&
+                        solution.cookies == null) {
                         DebugHelper.out("2 Got no 'solution' field from API", DebugHelper.Type.ERROR);
+                        DebugHelper.out(json.toString(), DebugHelper.Type.ERROR);
+
                     }
                 }
             } else {
@@ -143,11 +155,15 @@ public class TaskResultResponse {
         private String gRecaptchaResponse; // Will be available for Recaptcha tasks only!
         private String gRecaptchaResponseMd5; // for Recaptcha with isExtended=true property
         private String text; // Will be available for ImageToText tasks only!
-        private String url; // Will be available for ImageToText tasks only!
+        private String url; // Will be available for ImageToText and AntiGate tasks only!
         private String token; // Will be available for FunCaptcha tasks only
         private String challenge; // Will be available for GeeTest tasks only
         private String seccode; // Will be available for GeeTest tasks only
         private String validate; // Will be available for GeeTest tasks only
+        private JSONObject cookies;
+        private JSONObject localStorage;
+        private JSONObject fingerprint;
+        private String domain;
 
         public String getGRecaptchaResponseMd5() {
             return gRecaptchaResponseMd5;
@@ -179,6 +195,22 @@ public class TaskResultResponse {
 
         public String getToken() {
             return token;
+        }
+
+        public JSONObject getCookies() {
+            return cookies;
+        }
+
+        public JSONObject getLocalStorage() {
+            return localStorage;
+        }
+
+        public JSONObject getFingerprint() {
+            return fingerprint;
+        }
+
+        public String getDomain() {
+            return domain;
         }
     }
 }

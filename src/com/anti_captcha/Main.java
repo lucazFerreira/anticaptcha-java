@@ -1,17 +1,6 @@
 package com.anti_captcha;
 
-import com.anti_captcha.Api.GeeTest;
-import com.anti_captcha.Api.GeeTestProxyless;
-import com.anti_captcha.Api.HCaptchaProxyless;
-import com.anti_captcha.Api.ImageToText;
-import com.anti_captcha.Api.RecaptchaV2;
-import com.anti_captcha.Api.RecaptchaV2Proxyless;
-import com.anti_captcha.Api.RecaptchaV3Proxyless;
-import com.anti_captcha.Api.RecaptchaV2Enterprise;
-import com.anti_captcha.Api.RecaptchaV2EnterpriseProxyless;
-import com.anti_captcha.Api.RecaptchaV3EnterpriseProxyless;
-import com.anti_captcha.Api.FunCaptcha;
-import com.anti_captcha.Api.FunCaptchaProxyless;
+import com.anti_captcha.Api.*;
 import com.anti_captcha.Helper.DebugHelper;
 
 import org.json.JSONException;
@@ -36,6 +25,7 @@ public class Main {
         exampleGeeTest();
         exampleGeeTestProxyless();
         exampleHCaptchaProxyless();
+        exampleAntiGateTask();
     }
 
 
@@ -372,4 +362,52 @@ public class Main {
             DebugHelper.out("Result: " + api.getTaskSolution().getToken(), DebugHelper.Type.SUCCESS);
         }
     }
+
+    private static void exampleAntiGateTask() throws MalformedURLException, InterruptedException {
+        DebugHelper.setVerboseMode(true);
+
+        AntiGateTask api = new AntiGateTask();
+        api.setClientKey("1234567890123456789012");
+        api.setWebsiteUrl(new URL("http://antigate.com/logintest.php"));
+        api.setTemplateName("Sign-in and wait for control text");
+
+        JSONObject variables = new JSONObject();
+        try {
+            variables.put("login_input_css", "#login");
+            variables.put("login_input_value", "the login");
+            variables.put("password_input_css", "#password");
+            variables.put("password_input_value", "the password");
+            variables.put("control_text", "You have been logged successfully");
+        } catch (Exception e) {
+            DebugHelper.out("JSON exception: "+e.getMessage(), DebugHelper.Type.ERROR);
+            return;
+        }
+        api.setVariables(variables);
+
+//        api.setProxyAddress("xx.xxx.xx.xx");
+//        api.setProxyPort(8282);
+//        api.setProxyLogin("login");
+//        api.setProxyPassword("password");
+
+
+        if (!api.createTask()) {
+            DebugHelper.out(
+                    "API v2 send failed. " + api.getErrorMessage(),
+                    DebugHelper.Type.ERROR
+            );
+        } else if (!api.waitForResult()) {
+            DebugHelper.out("Could not solve the captcha.", DebugHelper.Type.ERROR);
+        } else {
+            DebugHelper.out("Result: ", DebugHelper.Type.SUCCESS);
+            DebugHelper.out("Cookies: ", DebugHelper.Type.SUCCESS);
+            DebugHelper.out(api.getTaskSolution().getCookies().toString(), DebugHelper.Type.SUCCESS);
+            DebugHelper.out("localStorage: ", DebugHelper.Type.SUCCESS);
+            DebugHelper.out(api.getTaskSolution().getLocalStorage().toString(), DebugHelper.Type.SUCCESS);
+            DebugHelper.out("fingerprint: ", DebugHelper.Type.SUCCESS);
+            DebugHelper.out(api.getTaskSolution().getFingerprint().toString(), DebugHelper.Type.SUCCESS);
+            DebugHelper.out("url: ", DebugHelper.Type.SUCCESS);
+            DebugHelper.out(api.getTaskSolution().getUrl(), DebugHelper.Type.SUCCESS);
+        }
+    }
+
 }
