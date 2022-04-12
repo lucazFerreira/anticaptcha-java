@@ -94,6 +94,89 @@ public class Main {
         }
     }
 
+    private static void exampleGeeTestV4Proxyless() throws MalformedURLException, InterruptedException {
+        DebugHelper.setVerboseMode(true);
+
+        GeeTestV4Proxyless api = new GeeTestV4Proxyless();
+        api.setClientKey("1234567890123456789012");
+        api.setWebsiteUrl(new URL("https://auth.geetest.com/"));
+        api.setWebsiteKey("b6e21f90a91a3c2d4a31fe84e10d0442");
+
+        // optional initial parameters
+        JSONObject additionalInitParameters = new JSONObject();
+        try {
+            additionalInitParameters.put("riskType", "ai");
+        } catch (Exception e) {
+            DebugHelper.out("JSON error: "+e.getMessage(), DebugHelper.Type.ERROR);
+            return;
+        }
+        api.setInitParameters(additionalInitParameters);
+
+        //optional parameters, read the documentation regarding this
+        api.setGeetestApiServerSubdomain("optional.subdomain.api.geetest.com");
+
+        if (!api.createTask()) {
+            DebugHelper.out(
+                    "API v2 send failed. " + api.getErrorMessage(),
+                    DebugHelper.Type.ERROR
+            );
+        } else if (!api.waitForResult()) {
+            DebugHelper.out("Could not solve the captcha.", DebugHelper.Type.ERROR);
+        } else {
+            DebugHelper.out("Result captcha_id: " + api.getTaskSolution().getCaptchaId(), DebugHelper.Type.SUCCESS);
+            DebugHelper.out("Result lot_number: " + api.getTaskSolution().getLotNumber(), DebugHelper.Type.SUCCESS);
+            DebugHelper.out("Result pass_token: " + api.getTaskSolution().getPassToken(), DebugHelper.Type.SUCCESS);
+            DebugHelper.out("Result gen_time: " + api.getTaskSolution().getGenTime(), DebugHelper.Type.SUCCESS);
+            DebugHelper.out("Result captcha_output: " + api.getTaskSolution().getCaptchaOutput(), DebugHelper.Type.SUCCESS);
+        }
+    }
+
+
+    private static void exampleGeeTestV4() throws MalformedURLException, InterruptedException {
+        DebugHelper.setVerboseMode(true);
+
+        GeeTestV4 api = new GeeTestV4();
+        api.setClientKey("1234567890123456789012");
+        api.setWebsiteUrl(new URL("https://auth.geetest.com/"));
+        api.setWebsiteKey("b6e21f90a91a3c2d4a31fe84e10d0442");
+
+        // optional initial parameters
+        JSONObject additionalInitParameters = new JSONObject();
+        try {
+            additionalInitParameters.put("riskType", "ai");
+        } catch (Exception e) {
+            DebugHelper.out("JSON error: "+e.getMessage(), DebugHelper.Type.ERROR);
+            return;
+        }
+        api.setInitParameters(additionalInitParameters);
+
+        //optional parameters, read the documentation regarding this
+        api.setGeetestApiServerSubdomain("optional.subdomain.api.geetest.com");
+
+
+        // proxy access parameters
+        api.setProxyType(RecaptchaV2.ProxyTypeOption.HTTP);
+        api.setProxyAddress("xx.xxx.xx.xx");
+        api.setProxyPort(8282);
+        api.setProxyLogin("login");
+        api.setProxyPassword("password");
+
+        if (!api.createTask()) {
+            DebugHelper.out(
+                    "API v2 send failed. " + api.getErrorMessage(),
+                    DebugHelper.Type.ERROR
+            );
+        } else if (!api.waitForResult()) {
+            DebugHelper.out("Could not solve the captcha.", DebugHelper.Type.ERROR);
+        } else {
+            DebugHelper.out("Result captcha_id: " + api.getTaskSolution().getCaptchaId(), DebugHelper.Type.SUCCESS);
+            DebugHelper.out("Result lot_number: " + api.getTaskSolution().getLotNumber(), DebugHelper.Type.SUCCESS);
+            DebugHelper.out("Result pass_token: " + api.getTaskSolution().getPassToken(), DebugHelper.Type.SUCCESS);
+            DebugHelper.out("Result gen_time: " + api.getTaskSolution().getGenTime(), DebugHelper.Type.SUCCESS);
+            DebugHelper.out("Result captcha_output: " + api.getTaskSolution().getCaptchaOutput(), DebugHelper.Type.SUCCESS);
+        }
+    }
+
     private static void exampleImageToText() throws InterruptedException {
         DebugHelper.setVerboseMode(true);
 

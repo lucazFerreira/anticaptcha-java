@@ -59,6 +59,11 @@ public class TaskResultResponse {
                     solution.localStorage = JsonHelper.extractJSONObject(json, "solution", "localStorage");
                     solution.fingerprint = JsonHelper.extractJSONObject(json,"solution",  "fingerprint");
                     solution.domain = JsonHelper.extractStr(json,"solution",  "domain", true);
+                    solution.captcha_id = JsonHelper.extractStr(json,"solution",  "captcha_id", true);
+                    solution.lot_number = JsonHelper.extractStr(json,"solution",  "lot_number", true);
+                    solution.pass_token = JsonHelper.extractStr(json,"solution",  "pass_token", true);
+                    solution.gen_time = JsonHelper.extractInt(json,"solution",  "gen_time", true);
+                    solution.captcha_output = JsonHelper.extractStr(json,"solution",  "captcha_output", true);
 
 
                     if (solution.gRecaptchaResponse == null &&
@@ -67,7 +72,8 @@ public class TaskResultResponse {
                         solution.challenge == null &&
                         solution.seccode == null &&
                         solution.validate == null &&
-                        solution.cookies == null) {
+                        solution.cookies == null &&
+                        solution.captcha_output == null) {
                         DebugHelper.out("2 Got no 'solution' field from API", DebugHelper.Type.ERROR);
                         DebugHelper.out(json.toString(), DebugHelper.Type.ERROR);
 
@@ -160,6 +166,11 @@ public class TaskResultResponse {
         private String challenge; // Will be available for GeeTest tasks only
         private String seccode; // Will be available for GeeTest tasks only
         private String validate; // Will be available for GeeTest tasks only
+        private String captcha_id; // Will be available for GeeTest v4 tasks only
+        private String lot_number; // Will be available for GeeTest v4 tasks only
+        private String pass_token; // Will be available for GeeTest v4 tasks only
+        private Integer gen_time; // Will be available for GeeTest v4 tasks only
+        private String captcha_output; // Will be available for GeeTest v4 tasks only
         private JSONObject cookies;
         private JSONObject localStorage;
         private JSONObject fingerprint;
@@ -211,6 +222,26 @@ public class TaskResultResponse {
 
         public String getDomain() {
             return domain;
+        }
+
+        public String getCaptchaId() {
+            return captcha_id;
+        }
+
+        public String getLotNumber() {
+            return lot_number;
+        }
+
+        public String getPassToken() {
+            return pass_token;
+        }
+
+        public Integer getGenTime() {
+            return gen_time;
+        }
+
+        public String getCaptchaOutput() {
+            return captcha_output;
         }
     }
 }

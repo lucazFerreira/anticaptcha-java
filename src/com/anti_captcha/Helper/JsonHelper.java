@@ -47,6 +47,21 @@ public class JsonHelper {
         }
     }
 
+    public static Integer extractInt(JSONObject json, String firstLevel, String secondLevel, Boolean silent) {
+        try {
+            return secondLevel == null
+                    ? json.getInt(firstLevel)
+                    : json.getJSONObject(firstLevel).getInt(secondLevel);
+        } catch (JSONException e) {
+            if (!silent) {
+                String path = firstLevel + (secondLevel == null ? "" : "=>" + secondLevel);
+                DebugHelper.jsonFieldParseError(path, json);
+            }
+
+            return null;
+        }
+    }
+
     public static Integer extractInt(JSONObject json, String fieldName) {
         return extractInt(json, fieldName, false);
     }
