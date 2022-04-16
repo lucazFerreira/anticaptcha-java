@@ -13,6 +13,8 @@ import java.net.URL;
 public class HCaptchaProxyless extends AnticaptchaBase implements IAnticaptchaTaskProtocol {
     URL websiteUrl;
     String websiteKey;
+    String userAgent;
+    JSONObject enterprisePayload;
 
     public JSONObject getPostData() {
         JSONObject postData = new JSONObject();
@@ -21,6 +23,8 @@ public class HCaptchaProxyless extends AnticaptchaBase implements IAnticaptchaTa
             postData.put("type", "HCaptchaTaskProxyless");
             postData.put("websiteURL", websiteUrl.toString());
             postData.put("websiteKey", websiteKey);
+            postData.put("userAgent", userAgent);
+            if (!enterprisePayload.equals(null)) postData.put("enterprisePayload", enterprisePayload);
         } catch (JSONException e) {
             DebugHelper.out("JSON compilation error: " + e.getMessage(), DebugHelper.Type.ERROR);
 
@@ -35,13 +39,19 @@ public class HCaptchaProxyless extends AnticaptchaBase implements IAnticaptchaTa
         return taskInfo.getSolution();
     }
 
-    @SuppressWarnings("unused")
     public void setWebsiteUrl(URL websiteUrl) {
         this.websiteUrl = websiteUrl;
     }
 
-    @SuppressWarnings("unused")
     public void setWebsiteKey(String websiteKey) {
         this.websiteKey = websiteKey;
+    }
+
+    public void setEnterprisePayload(JSONObject value) {
+        this.enterprisePayload = value;
+    }
+
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
     }
 }

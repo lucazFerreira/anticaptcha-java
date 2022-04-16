@@ -223,6 +223,20 @@ public class Main {
         api.setClientKey("1234567890123456789012");
         api.setWebsiteUrl(new URL("http://democaptcha.com/"));
         api.setWebsiteKey("51829642-2cda-4b09-896c-594f89d700cc");
+        api.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 " +
+                "(KHTML, like Gecko) Chrome/52.0.2743.116");
+
+        // uncomment and use for HCaptcha Enterprise version if you need to set parameters like rqdata, sentry, apiEndpoint, endpoint, reportapi, assethost, imghost
+//        JSONObject enterprisePayload = new JSONObject();
+//        try {
+//            enterprisePayload.put("rqdata", "rqdata from the target website");
+//            enterprisePayload.put("sentry", Boolean.TRUE);
+//            enterprisePayload.put("apiEndpoint", "https://...");
+//        } catch (Exception e) {
+//            DebugHelper.out("JSON error: "+e.getMessage(), DebugHelper.Type.ERROR);
+//            return;
+//        }
+//        api.setEnterprisePayload(enterprisePayload);
 
         if (!api.createTask()) {
             DebugHelper.out(

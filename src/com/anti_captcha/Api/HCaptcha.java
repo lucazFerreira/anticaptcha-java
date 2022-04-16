@@ -14,7 +14,6 @@ public class HCaptcha extends HCaptchaProxyless implements IAnticaptchaTaskProto
     private Integer proxyPort;
     private String proxyLogin;
     private String proxyPassword;
-    private String userAgent;
     private String cookies;
 
     @Override
@@ -32,6 +31,7 @@ public class HCaptcha extends HCaptchaProxyless implements IAnticaptchaTaskProto
             postData.put("proxyPassword", proxyPassword);
             postData.put("userAgent", userAgent);
             postData.put("cookies", cookies);
+            if (!enterprisePayload.equals(null)) postData.put("enterprisePayload", enterprisePayload);
         } catch (JSONException e) {
             DebugHelper.out("JSON compilation error: " + e.getMessage(), DebugHelper.Type.ERROR);
 
@@ -41,37 +41,26 @@ public class HCaptcha extends HCaptchaProxyless implements IAnticaptchaTaskProto
         return postData;
     }
 
-    @SuppressWarnings("unused")
     public void setProxyType(AnticaptchaBase.ProxyTypeOption proxyType) {
         this.proxyType = proxyType;
     }
 
-    @SuppressWarnings("unused")
     public void setProxyAddress(String proxyAddress) {
         this.proxyAddress = proxyAddress;
     }
 
-    @SuppressWarnings("unused")
     public void setProxyPort(Integer proxyPort) {
         this.proxyPort = proxyPort;
     }
 
-    @SuppressWarnings("unused")
     public void setProxyLogin(String proxyLogin) {
         this.proxyLogin = proxyLogin;
     }
 
-    @SuppressWarnings("unused")
     public void setProxyPassword(String proxyPassword) {
         this.proxyPassword = proxyPassword;
     }
 
-    @SuppressWarnings("unused")
-    public void setUserAgent(String userAgent) {
-        this.userAgent = userAgent;
-    }
-
-    @SuppressWarnings("unused")
     public void setCookies(String cookies) {
         this.cookies = cookies;
     }
