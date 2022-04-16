@@ -15,6 +15,7 @@ public class HCaptchaProxyless extends AnticaptchaBase implements IAnticaptchaTa
     String websiteKey;
     String userAgent;
     JSONObject enterprisePayload;
+    Boolean isInvisible;
 
     public JSONObject getPostData() {
         JSONObject postData = new JSONObject();
@@ -24,6 +25,7 @@ public class HCaptchaProxyless extends AnticaptchaBase implements IAnticaptchaTa
             postData.put("websiteURL", websiteUrl.toString());
             postData.put("websiteKey", websiteKey);
             postData.put("userAgent", userAgent);
+            postData.put("isInvisible", isInvisible);
             if (!enterprisePayload.equals(null)) postData.put("enterprisePayload", enterprisePayload);
         } catch (JSONException e) {
             DebugHelper.out("JSON compilation error: " + e.getMessage(), DebugHelper.Type.ERROR);
@@ -54,4 +56,6 @@ public class HCaptchaProxyless extends AnticaptchaBase implements IAnticaptchaTa
     public void setUserAgent(String userAgent) {
         this.userAgent = userAgent;
     }
+
+    public void setIsInvisible(Boolean isInvisible) { this.isInvisible = isInvisible; }
 }

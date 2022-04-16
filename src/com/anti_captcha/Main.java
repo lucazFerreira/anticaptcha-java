@@ -226,6 +226,9 @@ public class Main {
         api.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 " +
                 "(KHTML, like Gecko) Chrome/52.0.2743.116");
 
+        // uncomment to tell API that HCaptcha is in invisible mode
+//        api.setIsInvisible(true);
+
         // uncomment and use for HCaptcha Enterprise version if you need to set parameters like rqdata, sentry, apiEndpoint, endpoint, reportapi, assethost, imghost
 //        JSONObject enterprisePayload = new JSONObject();
 //        try {

@@ -14,6 +14,8 @@ public class RecaptchaV2Proxyless extends AnticaptchaBase implements IAnticaptch
     private URL websiteUrl;
     private String websiteKey;
     private String websiteSToken;
+    Boolean isInvisible;
+    String recaptchaDataSValue;
 
     public void setWebsiteUrl(URL websiteUrl) {
         this.websiteUrl = websiteUrl;
@@ -27,6 +29,10 @@ public class RecaptchaV2Proxyless extends AnticaptchaBase implements IAnticaptch
         this.websiteSToken = websiteSToken;
     }
 
+    public void setIsInvisible(Boolean isInvisible) { this.isInvisible = isInvisible; }
+
+    public void setRecaptchaDataSValue(String recaptchaDataSValue) { this.recaptchaDataSValue = recaptchaDataSValue; }
+
     @Override
     public JSONObject getPostData() {
         JSONObject postData = new JSONObject();
@@ -36,6 +42,8 @@ public class RecaptchaV2Proxyless extends AnticaptchaBase implements IAnticaptch
             postData.put("websiteURL", websiteUrl.toString());
             postData.put("websiteKey", websiteKey);
             postData.put("websiteSToken", websiteSToken);
+            postData.put("recaptchaDataSValue", recaptchaDataSValue);
+            postData.put("isInvisible", isInvisible);
         } catch (JSONException e) {
             DebugHelper.out("JSON compilation error: " + e.getMessage(), DebugHelper.Type.ERROR);
 
