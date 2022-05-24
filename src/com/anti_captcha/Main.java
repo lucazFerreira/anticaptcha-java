@@ -3,6 +3,7 @@ package com.anti_captcha;
 import com.anti_captcha.Api.*;
 import com.anti_captcha.Helper.DebugHelper;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -483,6 +484,12 @@ public class Main {
             return;
         }
         api.setVariables(variables);
+
+        // use this to collect data from other domains
+        JSONArray domainsOfInterest = new JSONArray();
+        domainsOfInterest.put("domain1.com");
+        domainsOfInterest.put("domain2.com");
+        api.setDomainsOfInterest(domainsOfInterest);
 
 //        api.setProxyAddress("xx.xxx.xx.xx");
 //        api.setProxyPort(8282);

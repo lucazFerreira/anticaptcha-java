@@ -4,6 +4,7 @@ import com.anti_captcha.AnticaptchaBase;
 import com.anti_captcha.ApiResponse.TaskResultResponse;
 import com.anti_captcha.Helper.DebugHelper;
 import com.anti_captcha.IAnticaptchaTaskProtocol;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,6 +14,7 @@ public class AntiGateTask extends AnticaptchaBase implements IAnticaptchaTaskPro
     private URL websiteUrl;
     private String templateName;
     private JSONObject variables;
+    private JSONArray domainsOfInterest;
     private String proxyAddress;
     private Integer proxyPort;
     private String proxyLogin;
@@ -28,6 +30,10 @@ public class AntiGateTask extends AnticaptchaBase implements IAnticaptchaTaskPro
 
     public void setVariables(JSONObject variables) {
         this.variables = variables;
+    }
+
+    public void setDomainsOfInterest(JSONArray domainsOfInterest) {
+        this.domainsOfInterest = domainsOfInterest;
     }
 
     public void setProxyAddress(String proxyAddress) {
@@ -55,16 +61,19 @@ public class AntiGateTask extends AnticaptchaBase implements IAnticaptchaTaskPro
             postData.put("websiteURL", websiteUrl.toString());
             postData.put("templateName", templateName);
 
-            if (proxyAddress != null && proxyPort != null) {
+            if (!proxyAddress.equals(null) && !proxyPort.equals(null)) {
                 postData.put("proxyAddress", proxyAddress);
                 postData.put("proxyPort", proxyPort);
             }
-            if (proxyLogin != null && proxyPassword != null) {
+            if (!proxyLogin.equals(null) && !proxyPassword.equals(null)) {
                 postData.put("proxyLogin", proxyLogin);
                 postData.put("proxyPassword", proxyPassword);
             }
-            if (variables != null) {
+            if (!variables.equals(null)) {
                 postData.put("variables", variables);
+            }
+            if (!domainsOfInterest.equals(null)) {
+                postData.put("domainsOfInterest", domainsOfInterest);
             }
 
         } catch (JSONException e) {
