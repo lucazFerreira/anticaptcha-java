@@ -26,7 +26,10 @@ public class HCaptchaProxyless extends AnticaptchaBase implements IAnticaptchaTa
             postData.put("websiteKey", websiteKey);
             postData.put("userAgent", userAgent);
             postData.put("isInvisible", isInvisible);
-            if (!enterprisePayload.equals(null)) postData.put("enterprisePayload", enterprisePayload);
+
+            if (enterprisePayload != null) {
+                postData.put("enterprisePayload", enterprisePayload);
+            }
         } catch (JSONException e) {
             DebugHelper.out("JSON compilation error: " + e.getMessage(), DebugHelper.Type.ERROR);
 

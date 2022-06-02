@@ -31,7 +31,10 @@ public class HCaptcha extends HCaptchaProxyless implements IAnticaptchaTaskProto
             postData.put("proxyPassword", proxyPassword);
             postData.put("userAgent", userAgent);
             postData.put("cookies", cookies);
-            if (!enterprisePayload.equals(null)) postData.put("enterprisePayload", enterprisePayload);
+
+            if (enterprisePayload != null) {
+                postData.put("enterprisePayload", enterprisePayload);
+            }
         } catch (JSONException e) {
             DebugHelper.out("JSON compilation error: " + e.getMessage(), DebugHelper.Type.ERROR);
 

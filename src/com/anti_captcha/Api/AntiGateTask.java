@@ -61,18 +61,18 @@ public class AntiGateTask extends AnticaptchaBase implements IAnticaptchaTaskPro
             postData.put("websiteURL", websiteUrl.toString());
             postData.put("templateName", templateName);
 
-            if (!proxyAddress.equals(null) && !proxyPort.equals(null)) {
+            if (proxyAddress != null && proxyPort != null) {
                 postData.put("proxyAddress", proxyAddress);
                 postData.put("proxyPort", proxyPort);
             }
-            if (!proxyLogin.equals(null) && !proxyPassword.equals(null)) {
+            if (proxyLogin != null && proxyPassword != null) {
                 postData.put("proxyLogin", proxyLogin);
                 postData.put("proxyPassword", proxyPassword);
             }
-            if (!variables.equals(null)) {
+            if (variables != null) {
                 postData.put("variables", variables);
             }
-            if (!domainsOfInterest.equals(null)) {
+            if (domainsOfInterest != null) {
                 postData.put("domainsOfInterest", domainsOfInterest);
             }
 
