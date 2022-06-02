@@ -35,6 +35,13 @@ public class Main {
 
         GeeTest api = new GeeTest();
         api.setClientKey("1234567890123456789012");
+
+        /*
+         *  Specify softId to earn 10% commission with your app.
+         *  Get your softId here:
+         *  https://anti-captcha.com/clients/tools/devcenter
+         */
+        api.setSoftId(0);
         api.setWebsiteUrl(new URL("https://auth.geetest.com/"));
         api.setWebsiteKey("b6e21f90a91a3c2d4a31fe84e10d0442");
         // you need to get a new "challenge" each time
@@ -71,6 +78,13 @@ public class Main {
 
         GeeTestProxyless api = new GeeTestProxyless();
         api.setClientKey("1234567890123456789012");
+
+        /*
+         *  Specify softId to earn 10% commission with your app.
+         *  Get your softId here:
+         *  https://anti-captcha.com/clients/tools/devcenter
+         */
+        api.setSoftId(0);
         api.setWebsiteUrl(new URL("https://auth.geetest.com/"));
         api.setWebsiteKey("b6e21f90a91a3c2d4a31fe84e10d0442");
 
@@ -100,6 +114,13 @@ public class Main {
 
         GeeTestV4Proxyless api = new GeeTestV4Proxyless();
         api.setClientKey("1234567890123456789012");
+
+        /*
+         *  Specify softId to earn 10% commission with your app.
+         *  Get your softId here:
+         *  https://anti-captcha.com/clients/tools/devcenter
+         */
+        api.setSoftId(0);
         api.setWebsiteUrl(new URL("https://auth.geetest.com/"));
         api.setWebsiteKey("b6e21f90a91a3c2d4a31fe84e10d0442");
 
@@ -138,6 +159,13 @@ public class Main {
 
         GeeTestV4 api = new GeeTestV4();
         api.setClientKey("1234567890123456789012");
+
+        /*
+         *  Specify softId to earn 10% commission with your app.
+         *  Get your softId here:
+         *  https://anti-captcha.com/clients/tools/devcenter
+         */
+        api.setSoftId(0);
         api.setWebsiteUrl(new URL("https://auth.geetest.com/"));
         api.setWebsiteKey("b6e21f90a91a3c2d4a31fe84e10d0442");
 
@@ -183,6 +211,13 @@ public class Main {
 
         ImageToText api = new ImageToText();
         api.setClientKey("1234567890123456789012");
+
+        /*
+         *  Specify softId to earn 10% commission with your app.
+         *  Get your softId here:
+         *  https://anti-captcha.com/clients/tools/devcenter
+         */
+        api.setSoftId(0);
         api.setFilePath("captcha.jpg");
 
         if (!api.createTask()) {
@@ -202,6 +237,13 @@ public class Main {
 
         RecaptchaV2Proxyless api = new RecaptchaV2Proxyless();
         api.setClientKey("1234567890123456789012");
+
+        /*
+         *  Specify softId to earn 10% commission with your app.
+         *  Get your softId here:
+         *  https://anti-captcha.com/clients/tools/devcenter
+         */
+        api.setSoftId(0);
         api.setWebsiteUrl(new URL("http://http.myjino.ru/recaptcha/test-get.php"));
         api.setWebsiteKey("6Lc_aCMTAAAAABx7u2W0WPXnVbI_v6ZdbM6rYf16");
 
@@ -222,6 +264,13 @@ public class Main {
 
         HCaptchaProxyless api = new HCaptchaProxyless();
         api.setClientKey("1234567890123456789012");
+
+        /*
+         *  Specify softId to earn 10% commission with your app.
+         *  Get your softId here:
+         *  https://anti-captcha.com/clients/tools/devcenter
+         */
+        api.setSoftId(0);
         api.setWebsiteUrl(new URL("http://democaptcha.com/"));
         api.setWebsiteKey("51829642-2cda-4b09-896c-594f89d700cc");
         api.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 " +
@@ -259,6 +308,13 @@ public class Main {
 
         RecaptchaV3Proxyless api = new RecaptchaV3Proxyless();
         api.setClientKey("1234567890123456789012");
+
+        /*
+         *  Specify softId to earn 10% commission with your app.
+         *  Get your softId here:
+         *  https://anti-captcha.com/clients/tools/devcenter
+         */
+        api.setSoftId(0);
         api.setWebsiteUrl(new URL("http://www.supremenewyork.com"));
         api.setWebsiteKey("6Leva6oUAAAAAMFYqdLAI8kJ5tw7BtkHYpK10RcD");
         api.setPageAction("testPageAction");
@@ -280,6 +336,13 @@ public class Main {
 
         RecaptchaV2 api = new RecaptchaV2();
         api.setClientKey("1234567890123456789012");
+
+        /*
+         *  Specify softId to earn 10% commission with your app.
+         *  Get your softId here:
+         *  https://anti-captcha.com/clients/tools/devcenter
+         */
+        api.setSoftId(0);
         api.setWebsiteUrl(new URL("http://http.myjino.ru/recaptcha/test-get.php"));
         api.setWebsiteKey("6Lc_aCMTAAAAABx7u2W0WPXnVbI_v6ZdbM6rYf16");
         api.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 " +
@@ -310,6 +373,13 @@ public class Main {
 
         RecaptchaV2Enterprise api = new RecaptchaV2Enterprise();
         api.setClientKey("1234567890123456789012");
+
+        /*
+         *  Specify softId to earn 10% commission with your app.
+         *  Get your softId here:
+         *  https://anti-captcha.com/clients/tools/devcenter
+         */
+        api.setSoftId(0);
         api.setWebsiteUrl(new URL("http://http.myjino.ru/recaptcha/test-get.php"));
         api.setWebsiteKey("6Lc_aCMTAAAAABx7u2W0WPXnVbI_v6ZdbM6rYf16");
         api.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 " +
@@ -348,6 +418,13 @@ public class Main {
 
         RecaptchaV2EnterpriseProxyless api = new RecaptchaV2EnterpriseProxyless();
         api.setClientKey("1234567890123456789012");
+
+        /*
+         *  Specify softId to earn 10% commission with your app.
+         *  Get your softId here:
+         *  https://anti-captcha.com/clients/tools/devcenter
+         */
+        api.setSoftId(0);
         api.setWebsiteUrl(new URL("http://http.myjino.ru/recaptcha/test-get.php"));
         api.setWebsiteKey("6Lc_aCMTAAAAABx7u2W0WPXnVbI_v6ZdbM6rYf16");
 
@@ -377,6 +454,13 @@ public class Main {
 
         RecaptchaV3EnterpriseProxyless api = new RecaptchaV3EnterpriseProxyless();
         api.setClientKey("1234567890123456789012");
+
+        /*
+         *  Specify softId to earn 10% commission with your app.
+         *  Get your softId here:
+         *  https://anti-captcha.com/clients/tools/devcenter
+         */
+        api.setSoftId(0);
         api.setWebsiteUrl(new URL("http://www.supremenewyork.com"));
         api.setWebsiteKey("6Leva6oUAAAAAMFYqdLAI8kJ5tw7BtkHYpK10RcD");
         api.setPageAction("testPageAction");
@@ -413,6 +497,13 @@ public class Main {
 
         FunCaptcha api = new FunCaptcha();
         api.setClientKey("1234567890123456789012");
+
+        /*
+         *  Specify softId to earn 10% commission with your app.
+         *  Get your softId here:
+         *  https://anti-captcha.com/clients/tools/devcenter
+         */
+        api.setSoftId(0);
         api.setWebsiteUrl(new URL("http://http.myjino.ru/funcaptcha_test/"));
         api.setWebsitePublicKey("DE0B0BB7-1EE4-4D70-1853-31B835D4506B");
         api.setUserAgent("Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/52.0.2743.116");
@@ -445,6 +536,13 @@ public class Main {
 
         FunCaptchaProxyless api = new FunCaptchaProxyless();
         api.setClientKey("1234567890123456789012");
+
+        /*
+         *  Specify softId to earn 10% commission with your app.
+         *  Get your softId here:
+         *  https://anti-captcha.com/clients/tools/devcenter
+         */
+        api.setSoftId(0);
         api.setWebsiteUrl(new URL("http://http.myjino.ru/funcaptcha_test/"));
         api.setWebsitePublicKey("DE0B0BB7-1EE4-4D70-1853-31B835D4506B");
 
@@ -469,6 +567,13 @@ public class Main {
 
         AntiGateTask api = new AntiGateTask();
         api.setClientKey("1234567890123456789012");
+
+        /*
+         *  Specify softId to earn 10% commission with your app.
+         *  Get your softId here:
+         *  https://anti-captcha.com/clients/tools/devcenter
+         */
+        api.setSoftId(0);
         api.setWebsiteUrl(new URL("http://antigate.com/logintest.php"));
         api.setTemplateName("Sign-in and wait for control text");
 

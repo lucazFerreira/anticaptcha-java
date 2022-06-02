@@ -16,11 +16,18 @@ import java.util.concurrent.TimeUnit;
 
 public abstract class AnticaptchaBase {
     protected TaskResultResponse taskInfo;
-    private String host = "api.anti-captcha.com";
-    private SchemeType scheme = SchemeType.HTTPS;
+    private final String host = "api.anti-captcha.com";
+    private final SchemeType scheme = SchemeType.HTTPS;
     private String errorMessage;
     private Integer taskId;
     private String clientKey;
+
+    /**
+     *  Specify softId to earn 10% commission with your app.
+     *  Get your softId here:
+     *  <a href="https://anti-captcha.com/clients/tools/devcenter">https://anti-captcha.com/clients/tools/devcenter</a>
+     */
+    private Integer softId;
 
     public enum ProxyTypeOption {
         HTTP,
@@ -74,6 +81,7 @@ public abstract class AnticaptchaBase {
 
         try {
             jsonPostData.put("clientKey", clientKey);
+            jsonPostData.put("softId", softId);
             jsonPostData.put("task", taskJson);
         } catch (JSONException e) {
             errorMessage = e.getMessage();
@@ -248,6 +256,19 @@ public abstract class AnticaptchaBase {
     @SuppressWarnings("WeakerAccess")
     public void setClientKey(String clientKey_) {
         clientKey = clientKey_;
+    }
+
+    public Integer getSoftId() {
+        return softId;
+    }
+
+    /**
+     *  Specify softId to earn 10% commission with your app.
+     *  Get your softId here:
+     *  <a href="https://anti-captcha.com/clients/tools/devcenter">https://anti-captcha.com/clients/tools/devcenter</a>
+     */
+    public void setSoftId(Integer softId_) {
+        softId = softId_;
     }
 
     @SuppressWarnings("WeakerAccess")
