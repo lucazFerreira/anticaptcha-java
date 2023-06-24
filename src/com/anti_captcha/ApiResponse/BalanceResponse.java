@@ -10,6 +10,7 @@ public class BalanceResponse {
     private String errorCode;
     private String errorDescription;
     private Double balance;
+    private Double captchaCredits;
 
     public BalanceResponse(JSONObject json) {
         errorId = JsonHelper.extractInt(json, "errorId");
@@ -17,6 +18,13 @@ public class BalanceResponse {
         if (errorId != null) {
             if (errorId.equals(0)) {
                 balance = JsonHelper.extractDouble(json, "balance");
+
+                try {
+                    captchaCredits = return json.getDouble("captchaCredits");
+                } catch (JSONException e1) {
+                    captchaCredits = 0;
+                }
+
             } else {
                 errorCode = JsonHelper.extractStr(json, "errorCode");
                 errorDescription = JsonHelper.extractStr(json, "errorDescription");
@@ -38,6 +46,10 @@ public class BalanceResponse {
 
     public Double getBalance() {
         return balance;
+    }
+
+    public Double getCreditsBalance() {
+        return captchaCredits;
     }
 
     public Integer getErrorId() {
