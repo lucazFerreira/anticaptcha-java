@@ -25,6 +25,7 @@ public class Main {
         exampleFuncaptchaProxyless();
         exampleGeeTest();
         exampleGeeTestProxyless();
+        exampleGeeTestV4Proxyless();
         exampleHCaptchaProxyless();
         exampleAntiGateTask();
     }
@@ -85,15 +86,15 @@ public class Main {
          *  https://anti-captcha.com/clients/tools/devcenter
          */
         api.setSoftId(0);
-        api.setWebsiteUrl(new URL("https://auth.geetest.com/"));
-        api.setWebsiteKey("b6e21f90a91a3c2d4a31fe84e10d0442");
+        api.setWebsiteUrl(new URL("https://website.com/"));
+        api.setWebsiteKey("1234567890123456789012");
 
         // you need to get a new "challenge" each time
-        api.setWebsiteChallenge("cd0b3b5c33fb951ab364d9e13ccd7bf8");
+        api.setWebsiteChallenge("0419ca9b76263244275d0fb5df8a4127");
 
         //optional parameters, read the documentation regarding this
-        api.setGeetestApiServerSubdomain("optional.subdomain.api.geetest.com");
-        api.setGeetestLib("{\"customlibs\":\"url-to-lib.js\"}");
+        //api.setGeetestApiServerSubdomain("optional.subdomain.api.geetest.com");
+        //api.setGeetestLib("{\"customlibs\":\"url-to-lib.js\"}");
 
         if (!api.createTask()) {
             DebugHelper.out(
@@ -121,8 +122,8 @@ public class Main {
          *  https://anti-captcha.com/clients/tools/devcenter
          */
         api.setSoftId(0);
-        api.setWebsiteUrl(new URL("https://auth.geetest.com/"));
-        api.setWebsiteKey("b6e21f90a91a3c2d4a31fe84e10d0442");
+        api.setWebsiteUrl(new URL("https://website.com/"));
+        api.setWebsiteKey("1234567890123456789012");
 
         // optional initial parameters
         JSONObject additionalInitParameters = new JSONObject();
@@ -135,7 +136,7 @@ public class Main {
         api.setInitParameters(additionalInitParameters);
 
         //optional parameters, read the documentation regarding this
-        api.setGeetestApiServerSubdomain("optional.subdomain.api.geetest.com");
+        //api.setGeetestApiServerSubdomain("optional.subdomain.api.geetest.com");
 
         if (!api.createTask()) {
             DebugHelper.out(

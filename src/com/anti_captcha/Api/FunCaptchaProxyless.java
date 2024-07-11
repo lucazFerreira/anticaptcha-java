@@ -26,10 +26,10 @@ public class FunCaptchaProxyless extends AnticaptchaBase implements IAnticaptcha
             postData.put("type", "FunCaptchaTaskProxyless");
             postData.put("websiteURL", websiteUrl);
             postData.put("websitePublicKey", websitePublicKey);
-            if (!this.apiSubdomain.equals(null)) {
+            if (this.apiSubdomain != null) {
                 postData.put("funcaptchaApiJSSubdomain", this.apiSubdomain);
             }
-            if (!this.dataBlob.equals(null)) {
+            if (this.dataBlob != null) {
                 postData.put("data", this.dataBlob);
             }
         } catch (JSONException e) {

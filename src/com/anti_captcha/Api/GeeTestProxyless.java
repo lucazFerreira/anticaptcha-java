@@ -63,10 +63,10 @@ public class GeeTestProxyless extends AnticaptchaBase implements IAnticaptchaTas
             postData.put("gt", websiteKey);
             postData.put("challenge", websiteChallenge);
 
-            if (!geetestApiServerSubdomain.equals(null) && geetestApiServerSubdomain.length() > 0) {
+            if (geetestApiServerSubdomain != null && geetestApiServerSubdomain.length() > 0) {
                 postData.put("geetestApiServerSubdomain", geetestApiServerSubdomain);
             }
-            if (!geetestLib.equals(null)) {
+            if (geetestLib != null) {
                 postData.put("geetestGetLib", geetestLib);
             }
 

@@ -52,9 +52,9 @@ public class GeeTestV4Proxyless extends AnticaptchaBase implements IAnticaptchaT
             postData.put("websiteURL", websiteUrl.toString());
             postData.put("gt", websiteKey);
             postData.put("version", 4);
-            if (!initParameters.equals(null)) postData.put("initParameters", initParameters);
+            if (initParameters != null) postData.put("initParameters", initParameters);
 
-            if (!geetestApiServerSubdomain.equals(null) && geetestApiServerSubdomain.length() > 0) {
+            if (geetestApiServerSubdomain != null && !geetestApiServerSubdomain.isEmpty()) {
                 postData.put("geetestApiServerSubdomain", geetestApiServerSubdomain);
             }
 

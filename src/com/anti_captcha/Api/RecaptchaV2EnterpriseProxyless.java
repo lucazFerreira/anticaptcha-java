@@ -34,7 +34,7 @@ public class RecaptchaV2EnterpriseProxyless extends AnticaptchaBase implements I
             postData.put("type", "RecaptchaV2EnterpriseTaskProxyless");
             postData.put("websiteURL", websiteUrl.toString());
             postData.put("websiteKey", websiteKey);
-            if (!enterprisePayload.equals(null)) postData.put("enterprisePayload", enterprisePayload);
+            if (enterprisePayload != null) postData.put("enterprisePayload", enterprisePayload);
         } catch (JSONException e) {
             DebugHelper.out("JSON compilation error: " + e.getMessage(), DebugHelper.Type.ERROR);
 

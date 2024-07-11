@@ -265,6 +265,7 @@ public abstract class AnticaptchaBase {
                 solution.getChallenge() == null &&
                 solution.getSeccode() == null &&
                 solution.getValidate() == null &&
+                solution.getCaptchaId() == null &&
                 solution.getCookies() == null) {
                 DebugHelper.out("Got no 'solution' field from API", DebugHelper.Type.ERROR);
 
