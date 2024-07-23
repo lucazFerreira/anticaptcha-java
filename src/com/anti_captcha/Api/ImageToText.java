@@ -19,12 +19,13 @@ public class ImageToText extends AnticaptchaBase implements IAnticaptchaTaskProt
     private Integer minLength;
     private Integer maxLength;
     private String bodyBase64;
+    private String languagePool;
 
     public void setPhrase(Boolean phrase) {
         this.phrase = phrase;
     }
 
-    public void setCase_(Boolean case_) {
+    public void setCase(Boolean case_) {
         this.case_ = case_;
     }
 
@@ -42,6 +43,10 @@ public class ImageToText extends AnticaptchaBase implements IAnticaptchaTaskProt
 
     public void setMaxLength(Integer maxLength) {
         this.maxLength = maxLength;
+    }
+
+    public void setLanguagePool(String languagePool) {
+        this.languagePool = languagePool;
     }
 
     public enum NumericOption {
@@ -109,6 +114,7 @@ public class ImageToText extends AnticaptchaBase implements IAnticaptchaTaskProt
             postData.put("math", math);
             postData.put("minLength", minLength);
             postData.put("maxLength", maxLength);
+            postData.put("languagePool", languagePool);
         } catch (JSONException e) {
             DebugHelper.out("JSON compilation error: " + e.getMessage(), DebugHelper.Type.ERROR);
 

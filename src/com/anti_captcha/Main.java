@@ -221,6 +221,15 @@ public class Main {
         api.setSoftId(0);
         api.setFilePath("captcha.jpg");
 
+        // optional parameters, see https://anti-captcha.com/apidoc/task-types/ImageToTextTask
+        // api.setPhrase(true);                                    // 2 words
+        // api.setCase(true);                                      // case sensitivity
+        // api.setNumeric(ImageToText.NumericOption.NUMBERS_ONLY); // only numbers
+        // api.setMath(1);                                         // do math operation like result of 50+5
+        // api.setMinLength(1);                                    // minimum length of the captcha text
+        // api.setMaxLength(10);                                   // maximum length of the captcha text
+        // api.setLanguagePool("en");                              // set pool of the languages used in the captcha
+
         if (!api.createTask()) {
             DebugHelper.out(
                     "API v2 send failed. " + api.getErrorMessage(),
