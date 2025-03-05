@@ -10,7 +10,6 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.methods.HttpRequestBase;
 import org.apache.http.client.protocol.HttpClientContext;
-import org.apache.http.conn.ssl.NoopHostnameVerifier;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicCookieStore;
@@ -142,8 +141,10 @@ public class HttpHelper {
 
             SSLContext.setDefault(sslcontext);
 
-            return HttpClients.custom()
-                    .setSSLSocketFactory(new SSLConnectionSocketFactory(sslcontext, new NoopHostnameVerifier()));
+            return HttpClientBuilder.create()
+                    .setSslcontext(sslcontext)
+                    .setSSLSocketFactory(new SSLConnectionSocketFactory(
+                            sslcontext, SSLConnectionSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)); // Compatível com 4.3.2
         }
 
         private class HttpsTrustManager implements X509TrustManager {
