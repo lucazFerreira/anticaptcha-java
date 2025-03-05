@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata>
+  <groupId>com.github.lucazFerreira</groupId>
+  <artifactId>anticaptcha-java</artifactId>
+  <versioning>
+    <versions>
+      <version>1.0.1-SNAPSHOT</version>
+    </versions>
+    <lastUpdated>20250305123516</lastUpdated>
+  </versioning>
+</metadata>
